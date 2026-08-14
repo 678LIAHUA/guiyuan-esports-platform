@@ -536,7 +536,7 @@ function modalContent(action) {
   }
   if (action === "账号菜单") {
     return `<table class="data-table" style="margin-top:0"><tbody>
-      <tr><td><strong>演示管理员</strong><span>owner@guiyuan.local</span></td><td>${tag("超级管理员")}</td></tr>
+      <tr><td><strong>演示管理员</strong><span>owner@example.com</span></td><td>${tag("超级管理员")}</td></tr>
       <tr><td>修改头像</td><td><button class="text-btn">选择图片</button></td></tr>
       <tr><td>修改密码</td><td><button class="text-btn">打开</button></td></tr>
       <tr><td>退出登录</td><td><button class="text-btn">退出</button></td></tr>
