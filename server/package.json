@@ -1,0 +1,13 @@
+{
+  "name": "playmate-customer-service",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Website customer service console for the playmate mini program.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

@@ -1,0 +1,378 @@
+<navigation-bar title="达人端" background="transparent">
+  <view slot="right" class="share">↗</view>
+</navigation-bar>
+
+<scroll-view class="page workbench safe-bottom" scroll-y>
+  <view class="content">
+    <view class="work-module hall-module" wx:if="{{showHallPanel}}">
+      <view class="module-head">
+        <view>
+          <text class="module-title">接单大厅</text>
+        </view>
+        <text class="module-badge">{{hallOrders.length + specifiedOrders.length}} 单</text>
+      </view>
+
+      <view class="specified-panel" wx:if="{{hasSpecifiedOrders}}">
+        <view class="specified-head">
+          <view>
+            <text>指定给我</text>
+            <text>老板已指定你接单，优先处理</text>
+          </view>
+          <text>{{specifiedOrders.length}} 单</text>
+        </view>
+        <view
+          class="hall-order specified"
+          wx:for="{{specifiedOrders}}"
+          wx:key="groupId"
+          data-group-id="{{item.groupId}}"
+          bindtap="selectHallOrder"
+        >
+          <view class="hall-card-head">
+            <view>
+              <text class="hall-title">{{item.title}}</text>
+              <text class="hall-boss">{{item.bossText}}</text>
+            </view>
+            <text class="hall-status">指定单</text>
+          </view>
+          <view class="hall-product">
+            <view class="hall-product-icon">指</view>
+            <view>
+              <text>{{item.requirementText}}</text>
+              <text>备注：{{item.remarkText}}</text>
+            </view>
+          </view>
+          <view class="hall-money">
+            <view>
+              <text>订单原价</text>
+              <text>{{item.originalAmountText}}</text>
+            </view>
+            <view>
+              <text>预计到手</text>
+              <text>{{item.playerIncomeText}}</text>
+            </view>
+            <view>
+              <text>分成比例</text>
+              <text>{{item.playerRateText}}</text>
+            </view>
+          </view>
+          <view class="hall-actions">
+            <button class="primary" catchtap="selectHallOrder" data-group-id="{{item.groupId}}">确认接单</button>
+          </view>
+        </view>
+      </view>
+
+      <view class="hall-list" wx:if="{{hallOrders.length}}">
+        <view
+          class="hall-order {{item.cardClass}}"
+          wx:for="{{hallOrders}}"
+          wx:key="groupId"
+          data-group-id="{{item.groupId}}"
+          bindtap="selectHallOrder"
+        >
+          <view class="hall-card-head">
+            <view>
+              <text class="hall-title">{{item.title}}</text>
+              <text class="hall-boss">{{item.bossText}}</text>
+            </view>
+            <text class="hall-status">{{item.statusText}}</text>
+          </view>
+          <view class="hall-product">
+            <view class="hall-product-icon">单</view>
+            <view>
+              <text>{{item.requirementText}}</text>
+              <text>备注：{{item.remarkText}}</text>
+            </view>
+          </view>
+          <view class="hall-money">
+            <view>
+              <text>订单原价</text>
+              <text>{{item.originalAmountText}}</text>
+            </view>
+            <view>
+              <text>预计到手</text>
+              <text>{{item.playerIncomeText}}</text>
+            </view>
+            <view>
+              <text>分成比例</text>
+              <text>{{item.playerRateText}}</text>
+            </view>
+          </view>
+          <view class="hall-actions">
+            <button catchtap="selectHallOrder" data-group-id="{{item.groupId}}">订单详情</button>
+            <button class="primary {{item.canAccept ? '' : 'disabled'}}" catchtap="selectHallOrder" data-group-id="{{item.groupId}}">{{item.canAccept ? '去接单' : '查看详情'}}</button>
+          </view>
+        </view>
+      </view>
+      <view class="hall-empty" wx:if="{{!hallOrders.length && !hasSpecifiedOrders}}">
+        <text>暂无可接订单</text>
+        <text>老板确认下单后，这里会出现新的订单</text>
+      </view>
+    </view>
+
+    <view class="work-module chat-module" wx:if="{{showMessagePanel}}">
+      <view class="module-head">
+        <view>
+          <text class="module-title">订单群聊</text>
+          <text class="module-sub">接单后的老板、客服和达人沟通都在这里</text>
+        </view>
+      </view>
+
+      <view class="chat-module-body">
+        <view class="player-message-list" wx:if="{{hasPlayerGroups}}">
+          <view
+            class="player-message-row {{item.cardClass}}"
+            wx:for="{{playerGroups}}"
+            wx:key="id"
+            data-group-id="{{item.id}}"
+            bindtap="openPlayerGroup"
+          >
+            <view class="group-avatar">群</view>
+            <view>
+              <view>
+                <text>{{item.title}}</text>
+                <text>{{item.updatedAt}}</text>
+              </view>
+              <text>{{item.memberText}}</text>
+              <text>{{item.lastMessage}}</text>
+            </view>
+          </view>
+        </view>
+        <view class="hall-empty" wx:if="{{!hasPlayerGroups}}">
+          <text>暂无订单消息</text>
+          <text>确认接单后，订单群会出现在这里</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="work-module orders-module" wx:if="{{showOrdersPanel}}">
+      <view class="module-head">
+        <view>
+          <text class="module-title">我的订单</text>
+          <text class="module-sub">查看已接订单，服务完成后提交结单确认</text>
+        </view>
+        <text class="module-badge">{{playerOrders.length}} 单</text>
+      </view>
+
+      <view class="order-list" wx:if="{{hasPlayerOrders}}">
+        <view
+          class="player-order-card"
+          wx:for="{{playerOrders}}"
+          wx:key="id"
+          data-group-id="{{item.groupId}}"
+          bindtap="openPlayerOrderGroup"
+        >
+          <view class="player-order-head">
+            <view>
+              <text>{{item.title}}</text>
+              <text>订单号 {{item.orderNo}} · 客服 {{item.serviceName}}</text>
+            </view>
+            <text>{{item.statusText}}</text>
+          </view>
+          <view class="player-order-meta">
+            <text>{{item.requirementText}}</text>
+            <text>达人 {{item.playerCount}} 人</text>
+          </view>
+          <view class="income-row">
+            <view>
+              <text>订单原价</text>
+              <text>{{item.originalAmountText}}</text>
+            </view>
+            <view>
+              <text>本单到手</text>
+              <text>{{item.playerIncomeText}}</text>
+            </view>
+          </view>
+          <button
+            class="finish-btn {{item.buttonClass}}"
+            data-group-id="{{item.id}}"
+            catchtap="requestFinishOrder"
+          >{{item.buttonText}}</button>
+        </view>
+      </view>
+      <view class="hall-empty" wx:else>
+        <text>暂无已接订单</text>
+        <text>确认接单后，订单会显示在这里</text>
+      </view>
+    </view>
+
+    <view class="work-module wallet-module" wx:if="{{showWalletPanel}}">
+      <view class="module-head">
+        <view>
+          <text class="module-title">钱包</text>
+          <text class="module-sub">收入入账、提现扣除和审核状态都在这里看。</text>
+        </view>
+      </view>
+
+      <view class="wallet-card">
+        <view class="wallet-main">
+          <text>可提现余额</text>
+          <text>{{wallet.balance}} 猫粮</text>
+        </view>
+        <view class="wallet-stats">
+          <view>
+            <text>累计收入</text>
+            <text>{{wallet.totalIncome}} 猫粮</text>
+          </view>
+          <view>
+            <text>审核中</text>
+            <text>{{wallet.pendingWithdraw}} 猫粮</text>
+          </view>
+          <view>
+            <text>已提现</text>
+            <text>{{wallet.totalWithdraw}} 猫粮</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="withdraw-card">
+        <view class="withdraw-input-row">
+          <input
+            value="{{withdrawAmount}}"
+            type="digit"
+            placeholder="输入提现猫粮数量"
+            placeholder-class="switch-player-placeholder"
+            bindinput="onWithdrawAmountInput"
+          />
+          <button bindtap="submitWithdrawal">提现</button>
+        </view>
+        <text>确认提现后会立即从余额扣除，后台处理前明细会显示“正在审核中”。</text>
+      </view>
+
+      <view class="wallet-list" wx:if="{{wallet.transactions.length}}">
+        <view class="wallet-row {{item.type}} {{item.status}}" wx:for="{{wallet.transactions}}" wx:key="id">
+          <view>
+            <text>{{item.title}}</text>
+            <text>{{item.desc}}</text>
+            <text wx:if="{{item.hint}}" class="wallet-hint">{{item.hint}}</text>
+          </view>
+          <view>
+            <text>{{item.amount > 0 ? '+' : ''}}{{item.amount}} 猫粮</text>
+            <text>{{item.timeText}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="hall-empty" wx:else>
+        <text>暂无收入明细</text>
+        <text>订单完成并由老板确认后，收入会自动入账</text>
+      </view>
+    </view>
+
+    <view class="work-module mine-module" wx:if="{{showMinePanel}}">
+      <view class="module-head">
+        <view>
+          <text class="module-title">我的</text>
+          <text class="module-sub">达人资料、接单状态和收益数据后续会接入后台</text>
+        </view>
+        <text class="module-badge">{{acceptingStatusText}}</text>
+      </view>
+
+      <view class="mine-preview">
+        <image class="mine-cover" src="{{player.cover || player.avatar}}" mode="aspectFill"></image>
+        <view class="mine-cover-mask"></view>
+        <view class="mine-preview-main">
+          <image class="mine-avatar" src="{{player.avatar}}" mode="aspectFill"></image>
+          <view>
+            <view class="name-line">
+              <text class="name">{{player.name}}</text>
+              <text class="status {{acceptingStatusClass}}">{{acceptingStatusText}}</text>
+            </view>
+            <text class="player-no">达人ID {{player.playerNo}}</text>
+          </view>
+        </view>
+        <view class="metric-row">
+          <view>
+            <text>今日接单</text>
+            <text>{{player.todayOrders}}单</text>
+          </view>
+          <view>
+            <text>今日收入</text>
+            <text>{{player.todayIncome}} 猫粮</text>
+          </view>
+          <view>
+            <text>本月收入</text>
+            <text>{{player.monthIncome}} 猫粮</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="profile-editor-card">
+        <view class="tag-editor-head">
+          <text>资料设置</text>
+          <text>头像和背景分开设置</text>
+        </view>
+        <view class="media-edit-grid">
+          <button class="media-edit" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+            <image src="{{player.avatar}}" mode="aspectFill"></image>
+            <text>更换头像</text>
+          </button>
+          <view class="media-edit" bindtap="chooseCover">
+            <image src="{{player.cover || player.avatar}}" mode="aspectFill"></image>
+            <text>更换背景</text>
+          </view>
+        </view>
+        <view class="profile-input-row">
+          <text>名字</text>
+          <input
+            value="{{nameInput}}"
+            placeholder="输入达人名字"
+            placeholder-class="switch-player-placeholder"
+            maxlength="12"
+            bindinput="onNameInput"
+            confirm-type="done"
+            bindconfirm="saveProfile"
+          />
+        </view>
+        <button class="wide-action" bindtap="saveProfile">保存资料</button>
+      </view>
+
+      <view class="switch-card mine-switch">
+        <view>
+          <text class="switch-title">接单开关</text>
+          <text class="switch-desc">{{acceptingStatusDesc}}</text>
+        </view>
+        <switch checked="{{acceptingOrders}}" color="#56c789" bindchange="toggleAccepting"></switch>
+        <button class="taking-btn {{acceptingStatusClass}}">{{acceptingButtonText}}</button>
+      </view>
+
+      <view class="signature-editor-card">
+        <view class="tag-editor-head">
+          <text>个性签名</text>
+          <text>{{signatureLength}}/60</text>
+        </view>
+        <textarea
+          value="{{signatureInput}}"
+          placeholder="写一句老板能看到的个性签名"
+          placeholder-class="switch-player-placeholder"
+          maxlength="60"
+          bindinput="onSignatureInput"
+        ></textarea>
+        <button class="wide-action" bindtap="saveSignature">保存签名</button>
+      </view>
+
+      <view class="switch-player-card">
+        <input
+          value="{{switchPlayerId}}"
+          placeholder="输入达人ID"
+          placeholder-class="switch-player-placeholder"
+          bindinput="onSwitchPlayerInput"
+          confirm-type="done"
+          bindconfirm="switchPlayerById"
+        />
+        <button bindtap="switchPlayerById">切换</button>
+      </view>
+    </view>
+
+    <view class="work-tabs card">
+      <view
+        class="work-tab {{item.active ? 'active' : ''}}"
+        wx:for="{{tabs}}"
+        wx:key="label"
+        data-panel="{{item.panel}}"
+        bindtap="switchPanel"
+      >
+        <view>{{item.icon}}</view>
+        <text>{{item.label}}</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>

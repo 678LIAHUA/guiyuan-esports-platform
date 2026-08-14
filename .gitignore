@@ -1,0 +1,27 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+
+# Runtime data and user uploads
+server/data/store.json
+server/data/store.json.*
+server/public/uploads/*
+!server/public/uploads/.gitkeep
+
+# WeChat developer private settings
+miniprogram/project.private.config.json
+
+# Dependencies, logs and editor files
+node_modules/
+*.log
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

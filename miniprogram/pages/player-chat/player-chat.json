@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "群聊",
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar"
+  }
+}

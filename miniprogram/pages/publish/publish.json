@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "快速下单",
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar"
+  }
+}

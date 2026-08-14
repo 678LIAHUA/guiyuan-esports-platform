@@ -1,0 +1,33 @@
+<navigation-bar title="趣味单搜索" background="transparent"></navigation-bar>
+
+<scroll-view class="page fun-search safe-bottom" scroll-y>
+  <view class="content">
+    <view class="search-head">
+      <text>{{resultTitle}}</text>
+      <text>优先展示最吻合搜索的趣味单，其后按下单人数排序</text>
+    </view>
+
+    <view
+      class="fun-order-card {{item.rankClass}}"
+      wx:for="{{orders}}"
+      wx:key="id"
+      data-order-id="{{item.id}}"
+      bindtap="openOrder"
+    >
+      <view class="order-top">
+        <view>
+          <text>{{item.title}}</text>
+          <text>{{item.desc || item.subtitle}}</text>
+        </view>
+        <text>{{item.rankText}}</text>
+      </view>
+      <view class="tag-row">
+        <text wx:for="{{item.tags}}" wx:key="*this">{{item}}</text>
+      </view>
+      <view class="order-bottom">
+        <text>{{item.price}} 猫粮起</text>
+        <text>{{item.orderCount}} 人下单</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>

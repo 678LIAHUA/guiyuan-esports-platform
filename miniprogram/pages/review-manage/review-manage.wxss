@@ -1,0 +1,61 @@
+page {
+  background: #f7f4ff;
+}
+
+.content {
+  padding: 22rpx 24rpx 120rpx;
+}
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.review-card {
+  padding: 22rpx;
+  border-radius: 26rpx;
+  background: #fff;
+  box-shadow: 0 12rpx 26rpx rgba(82, 63, 158, .08);
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.review-card view {
+  display: flex;
+  justify-content: space-between;
+  gap: 18rpx;
+  color: #171331;
+  font-size: 29rpx;
+  font-weight: 900;
+}
+
+.review-card view text:last-child {
+  color: #7357ee;
+}
+
+.review-card > text {
+  color: #756d94;
+  font-size: 24rpx;
+  font-weight: 800;
+  line-height: 34rpx;
+}
+
+.empty {
+  min-height: 360rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14rpx;
+  color: #756d94;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.empty text:first-child {
+  color: #171331;
+  font-size: 30rpx;
+  font-weight: 900;
+}

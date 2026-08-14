@@ -1,0 +1,21 @@
+<navigation-bar title="评价管理" background="#f7f4ff"></navigation-bar>
+
+<scroll-view class="page review-page safe-bottom" scroll-y>
+  <view class="content">
+    <view class="review-list" wx:if="{{hasReviews}}">
+      <view class="review-card" wx:for="{{reviews}}" wx:key="id">
+        <view>
+          <text>{{item.playerName || '达人'}}</text>
+          <text>{{item.ratingText}} 分</text>
+        </view>
+        <text>{{item.serviceName || item.gameName || '陪伴订单'}}</text>
+        <text>{{item.content || item.tagText}}</text>
+        <text>{{item.timeText}}</text>
+      </view>
+    </view>
+    <view class="empty" wx:else>
+      <text>暂无评价记录</text>
+      <text>订单完成后，在我的订单里评价达人</text>
+    </view>
+  </view>
+</scroll-view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "账单流水",
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar"
+  }
+}

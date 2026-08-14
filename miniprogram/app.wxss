@@ -1,0 +1,100 @@
+page {
+  min-height: 100vh;
+  color: #191633;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+  background: #f7f5ff;
+}
+
+view,
+text,
+image,
+scroll-view,
+button,
+input,
+textarea {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  background: none;
+  border: 0;
+}
+
+button::after {
+  border: 0;
+}
+
+.page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(255, 214, 116, .18), transparent 24%),
+    radial-gradient(circle at 88% 16%, rgba(141, 113, 245, .16), transparent 28%),
+    linear-gradient(180deg, #fbfaff 0%, #f5f1ff 58%, #ffffff 100%);
+}
+
+.safe-bottom {
+  padding-bottom: calc(36rpx + env(safe-area-inset-bottom));
+}
+
+.card {
+  background: rgba(255, 255, 255, .86);
+  border: 1rpx solid rgba(119, 91, 232, .12);
+  border-radius: 24rpx;
+  box-shadow: 0 14rpx 34rpx rgba(87, 69, 168, .11);
+}
+
+.soft-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, .94), rgba(247, 243, 255, .88));
+  border: 1rpx solid rgba(126, 100, 238, .12);
+  border-radius: 22rpx;
+}
+
+.primary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 82rpx;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 800;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #9174ff, #6845df);
+  box-shadow: 0 12rpx 24rpx rgba(112, 76, 226, .28);
+}
+
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 30rpx 0 18rpx;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  font-size: 32rpx;
+  font-weight: 900;
+  color: #1b1737;
+}
+
+.more {
+  color: #6d6293;
+  font-size: 24rpx;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36rpx;
+  padding: 0 16rpx;
+  color: #6550d8;
+  font-size: 21rpx;
+  font-weight: 700;
+  border-radius: 999rpx;
+  background: #eee9ff;
+}

@@ -1,0 +1,32 @@
+page {
+  min-height: 100vh;
+  background: #f8f6ff;
+}
+
+.legal-page {
+  height: 100vh;
+}
+
+.legal-card {
+  margin: 24rpx;
+  padding: 28rpx;
+  border-radius: 26rpx;
+  background: #fff;
+  box-shadow: 0 14rpx 34rpx rgba(87, 69, 168, .08);
+}
+
+.legal-title {
+  margin-bottom: 26rpx;
+  color: #1b1737;
+  font-size: 34rpx;
+  font-weight: 900;
+}
+
+.legal-line {
+  display: block;
+  margin-bottom: 18rpx;
+  color: #40395d;
+  font-size: 25rpx;
+  line-height: 42rpx;
+  word-break: break-word;
+}

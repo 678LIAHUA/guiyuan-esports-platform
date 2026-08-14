@@ -1,0 +1,65 @@
+<navigation-bar title="订单支付" back="{{true}}" background="#f7f7f7" color="#111111"></navigation-bar>
+
+<scroll-view class="page pay-page safe-bottom" scroll-y enable-flex>
+  <view class="pay-content">
+    <view class="expire-card">
+      <text class="clock-icon">◷</text>
+      <text><text class="pink">{{expireMinutes}}</text> 分 <text class="pink">{{expireSeconds}}</text> 秒 后失效</text>
+    </view>
+
+    <view class="order-card">
+      <view class="order-no">订单编号：{{orderNo}}</view>
+      <view class="goods-row">
+        <image class="goods-cover" src="{{cover}}" mode="aspectFill"></image>
+        <view class="goods-info">
+          <view class="goods-title">{{title}}</view>
+          <view class="goods-spec">规格：{{tokenAmount}}猫粮</view>
+          <view class="goods-price">{{amountYuanText}}</view>
+        </view>
+        <view class="goods-count">×1</view>
+      </view>
+      <view class="total-row">
+        <text>合计：</text>
+        <text>¥{{amountYuanText}}</text>
+      </view>
+    </view>
+
+    <view class="method-card">
+      <view class="method-title">支付方式</view>
+      <view class="method-row">
+        <view class="coupon-icon"></view>
+        <text>优惠券</text>
+        <text class="coupon-empty">暂无可用优惠券</text>
+        <text class="arrow">›</text>
+      </view>
+      <view class="method-row">
+        <view class="wechat-icon">微</view>
+        <text>微信支付</text>
+        <view class="checked">✓</view>
+      </view>
+    </view>
+
+    <view class="pay-tip-card">
+      <text>{{sendingHint}}</text>
+      <view class="pay-url-actions">
+        <button bindtap="copyPayUrl">复制支付链接</button>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="pay-bottom safe-bottom">
+  <view class="pay-total">
+    <text>实付款：<text>¥{{amountYuanText}}</text></text>
+    <text>已抵扣：¥0.00</text>
+  </view>
+  <button
+    open-type="contact"
+    session-from="{{sessionFrom}}"
+    show-message-card="true"
+    send-message-title="{{contactMessageTitle}}"
+    send-message-path="{{contactMessagePath}}"
+    send-message-img="{{contactMessageImg}}"
+    bindcontact="onContactPay"
+  >立即支付</button>
+</view>

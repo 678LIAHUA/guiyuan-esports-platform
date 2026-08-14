@@ -1,0 +1,98 @@
+<navigation-bar title="一键匹配" background="transparent" color="#ffffff"></navigation-bar>
+
+<view class="page quick-hour safe-bottom">
+  <view class="hero-zone">
+    <image wx:if="{{quickBgUrl}}" class="quick-bg-image" src="{{quickBgUrl}}" mode="aspectFill"></image>
+    <view wx:if="{{quickBgUrl}}" class="quick-bg-mask"></view>
+    <view class="floating-avatar avatar-a"><image src="/assets/avatar-yinyue.jpg" mode="aspectFill"></image></view>
+    <view class="floating-avatar avatar-b"><image src="/assets/avatar-xiaotao.jpg" mode="aspectFill"></image></view>
+    <view class="floating-avatar avatar-c"><image src="/assets/avatar-mobai.jpg" mode="aspectFill"></image></view>
+    <view class="center-bubble">
+      <image src="/assets/avatar-yinyue.jpg" mode="aspectFill"></image>
+      <image src="/assets/avatar-xinghe.jpg" mode="aspectFill"></image>
+      <image src="/assets/avatar-xiaotao.jpg" mode="aspectFill"></image>
+      <image src="/assets/avatar-mobai.jpg" mode="aspectFill"></image>
+    </view>
+  </view>
+
+  <view class="match-sheet">
+    <view class="sheet-head">
+      <text>我想找</text>
+      <view bindtap="showNotice">
+        <text>点单须知</text>
+        <text>?</text>
+      </view>
+    </view>
+
+    <scroll-view class="sheet-scroll" scroll-y>
+      <view class="option-row">
+        <text class="row-label">技能</text>
+        <view class="chip-wrap skill-wrap">
+          <button class="chip {{item.cls}}" wx:for="{{skillOptions}}" wx:key="id" data-group="skills" data-id="{{item.id}}" bindtap="chooseOption">{{item.name}}</button>
+        </view>
+      </view>
+
+      <view class="option-row">
+        <text class="row-label">玩法</text>
+        <view class="chip-wrap play-wrap">
+          <button class="chip {{item.cls}}" wx:for="{{playOptions}}" wx:key="id" data-group="plays" data-id="{{item.id}}" bindtap="chooseOption">{{item.name}}</button>
+        </view>
+      </view>
+
+      <view class="option-row">
+        <text class="row-label">难度</text>
+        <view class="chip-wrap two-wrap">
+          <button class="chip {{item.cls}}" wx:for="{{difficultyOptions}}" wx:key="id" data-group="difficulties" data-id="{{item.id}}" bindtap="chooseOption">{{item.name}}</button>
+        </view>
+      </view>
+
+      <view class="option-row">
+        <text class="row-label">等级</text>
+        <view class="chip-grid level-grid">
+          <button class="chip {{item.cls}}" wx:for="{{levelOptions}}" wx:key="id" data-group="levels" data-id="{{item.id}}" bindtap="chooseOption">{{item.name}}</button>
+        </view>
+        <text class="hint">{{levelHint}}</text>
+      </view>
+
+      <view class="option-row">
+        <text class="row-label">服务</text>
+        <view class="chip-wrap two-wrap">
+          <button class="chip {{item.cls}}" wx:for="{{serviceOptions}}" wx:key="id" data-group="services" data-id="{{item.id}}" bindtap="chooseOption">{{item.name}}</button>
+        </view>
+      </view>
+
+      <view class="option-row">
+        <text class="row-label">性别</text>
+        <view class="chip-wrap three-wrap">
+          <button class="chip {{item.cls}}" wx:for="{{genderOptions}}" wx:key="id" data-group="genders" data-id="{{item.id}}" bindtap="chooseOption">{{item.name}}</button>
+        </view>
+      </view>
+
+      <view class="option-row">
+        <text class="row-label">类型</text>
+        <view class="chip-wrap two-wrap">
+          <button class="chip {{item.cls}}" wx:for="{{typeOptions}}" wx:key="id" data-group="types" data-id="{{item.id}}" bindtap="chooseOption">{{item.name}}</button>
+        </view>
+      </view>
+
+      <view class="option-row hour-row">
+        <text class="row-label">单数</text>
+        <view class="hour-stepper">
+          <button class="{{hours <= 1 ? 'disabled' : ''}}" data-step="-1" bindtap="changeHours">-</button>
+          <text>{{hours}}</text>
+          <button data-step="1" bindtap="changeHours">+</button>
+        </view>
+        <text class="hour-unit">小时</text>
+      </view>
+      <view class="option-row remark-row">
+        <text class="row-label">备注</text>
+        <textarea class="remark-input" value="{{remark}}" maxlength="80" auto-height placeholder="例如：想要稳一点、不要太吵、指定打法或注意事项" bindinput="onRemarkInput"></textarea>
+      </view>
+    </scroll-view>
+
+    <view class="dispatch-panel">
+      <view>推荐价格：{{priceRangeText}}</view>
+      <button bindtap="startDispatch"><text>⚡</text>确认付款</button>
+    </view>
+  </view>
+</view>

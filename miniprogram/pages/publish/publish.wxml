@@ -1,0 +1,9 @@
+<navigation-bar title="快速下单" background="transparent" color="#ffffff"></navigation-bar>
+
+<view class="publish-placeholder">
+  <view class="placeholder-card">
+    <view class="placeholder-title">快速下单已移到二级页面</view>
+    <view class="placeholder-desc">从底部点击“快速下单”会直接进入一键匹配页面。</view>
+    <button bindtap="openQuickMatch">进入快速下单</button>
+  </view>
+</view>

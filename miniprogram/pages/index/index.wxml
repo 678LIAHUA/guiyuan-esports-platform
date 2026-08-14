@@ -1,0 +1,150 @@
+<view class="home-nav">
+  <view class="nav-safe"></view>
+  <view class="topbar">
+    <view class="nav-brand">
+      <view class="brand-logo-box">
+        <image class="brand-logo" src="/assets/guiyuan-cat-icon.png" mode="aspectFit"></image>
+      </view>
+      <view class="brand-text">
+        <text class="brand-name">桂圆电竞</text>
+        <text class="brand-subtitle">陪伴接单平台</text>
+      </view>
+    </view>
+  </view>
+  <view class="search card">
+    <text class="search-icon">搜</text>
+    <input
+      value="{{funSearchKeyword}}"
+      placeholder="搜索达人ID、昵称、等级或单子"
+      placeholder-class="search-placeholder"
+      bindinput="onFunSearchInput"
+      bindconfirm="confirmFunSearch"
+      confirm-type="search"
+    />
+  </view>
+</view>
+
+<view wx:if="{{showCustomerQr}}" class="customer-qr-mask" bindtap="closeCustomerQr">
+  <view class="customer-qr-dialog" catchtap="noop">
+    <view class="customer-qr-close" bindtap="closeCustomerQr"><view class="customer-qr-close-line line-a"></view><view class="customer-qr-close-line line-b"></view></view>
+    <view class="customer-qr-title">联系客服</view>
+    <image class="customer-qr-image" src="{{customerServiceQrUrl}}" mode="aspectFit" show-menu-by-longpress="true"></image>
+    <view class="customer-qr-tip">长按识别或保存二维码</view>
+  </view>
+</view>
+
+<scroll-view class="page home safe-bottom" scroll-y enable-flex>
+  <view class="content">
+    <view class="broadcast-card">
+      <text>播报</text>
+      <swiper class="broadcast-swiper" vertical autoplay circular interval="2600" duration="420">
+        <swiper-item wx:for="{{broadcasts}}" wx:key="*this">
+          <view>{{item}}</view>
+        </swiper-item>
+      </swiper>
+    </view>
+
+    <swiper
+      class="hero-swiper"
+      autoplay
+      circular
+      interval="3600"
+      duration="760"
+      previous-margin="18rpx"
+      next-margin="18rpx"
+      bindchange="onBannerChange"
+    >
+      <swiper-item wx:for="{{banners}}" wx:key="img">
+        <view class="hero-card {{item.cls}}">
+          <image class="hero" src="{{item.img}}" mode="aspectFill"></image>
+          <view class="hero-shine"></view>
+        </view>
+      </swiper-item>
+    </swiper>
+
+    <view class="game-grid">
+      <view
+        class="game-item {{item.cls}}"
+        wx:for="{{games}}"
+        wx:key="id"
+        data-game-id="{{item.id}}"
+        bindtap="chooseGame"
+      >
+        <image class="entry-icon" src="{{item.iconUrl}}" mode="aspectFit"></image>
+        <view class="entry-label">{{item.name}}</view>
+      </view>
+    </view>
+
+    <view class="section-panel recommend-panel">
+      <view class="section-head">
+        <view class="section-title"><text>热门达人</text></view>
+        <view class="more" bindtap="openPlayerList">更多 ›</view>
+      </view>
+
+      <scroll-view class="player-row" scroll-x>
+        <view
+          class="player-card {{item.cardClass}}"
+          wx:for="{{players}}"
+          wx:key="id"
+          data-player-id="{{item.id}}"
+          bindtap="openDetail"
+        >
+          <view class="status {{item.statusClass}}">{{item.statusText}}</view>
+          <image class="player-img" src="{{item.img}}" mode="aspectFill"></image>
+          <view class="player-name">{{item.name}}</view>
+          <view class="player-tags">
+            <text>{{item.level}}</text>
+            <text>{{item.gender}}</text>
+            <text>{{item.age}}岁</text>
+          </view>
+          <view class="player-meta">
+            <text>{{item.score}}分</text>
+            <text>{{item.served}}单</text>
+          </view>
+          <view class="price"><text>{{item.price}}</text> 猫粮/小时</view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="invite-panel">
+      <view class="invite-copy">
+        <view class="invite-kicker">邀请有礼</view>
+        <view class="invite-title">新用户填你的ID，首月返 {{invite.rate}}%</view>
+        <view class="invite-desc">我的ID：{{invite.myId}} · {{invite.statusText}}</view>
+      </view>
+      <view class="invite-actions">
+        <button bindtap="copyInviteId">复制ID</button>
+        <button class="primary" bindtap="fillInviterId">填写邀请人</button>
+      </view>
+    </view>
+
+    <view class="section-panel order-panel">
+      <view class="section-head">
+        <view class="section-title"><text>热门订单</text></view>
+        <view class="more" bindtap="confirmFunSearch">查看所有单子 ›</view>
+      </view>
+      <view class="hot-order-list">
+        <view class="hot-order-card" wx:for="{{hotOrders}}" wx:key="id" data-order-id="{{item.id}}" bindtap="openOrder">
+          <image src="{{item.imageUrl}}" mode="aspectFill"></image>
+          <view>
+            <view class="hot-order-title">{{item.title}}</view>
+            <view class="hot-order-desc">{{item.desc}}</view>
+          </view>
+          <view class="hot-order-price">
+            <text>{{item.price}}</text>
+            <text>猫粮</text>
+            <text>销量 {{item.orderCount}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="service-float" bindtap="openCustomerQr">
+  <view class="service-float-glow"></view>
+  <image src="/assets/guiyuan-logo.jpg" mode="aspectFill"></image>
+  <view class="service-float-copy">
+    <text>客服</text>
+  </view>
+</view>

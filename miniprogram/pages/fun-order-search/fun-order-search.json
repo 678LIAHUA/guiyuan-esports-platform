@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "趣味单搜索",
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar"
+  }
+}

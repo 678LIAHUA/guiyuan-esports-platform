@@ -1,0 +1,30 @@
+<navigation-bar title="其他游戏" back="{{true}}" background="#f7f4ff"></navigation-bar>
+
+<view class="page game-list safe-bottom">
+  <view class="list-head">
+    <view class="head-title">更多可下单游戏</view>
+    <view class="head-desc">游戏名称、图标、排序和上架状态都可以由后台维护</view>
+  </view>
+
+  <scroll-view class="games-scroll" scroll-y enable-flex>
+    <view class="games-grid">
+      <view
+        class="game-card"
+        wx:for="{{games}}"
+        wx:key="id"
+        data-game-id="{{item.id}}"
+        bindtap="openGame"
+      >
+        <image class="game-icon" src="{{item.iconUrl}}" mode="aspectFit"></image>
+        <view class="game-info">
+          <view class="game-name">{{item.name}}</view>
+          <view class="game-meta">
+            <text>{{item.orderSizeText}}</text>
+            <text>{{item.hotText}}</text>
+          </view>
+        </view>
+        <view class="enter-btn">进入</view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,21 @@
+<navigation-bar title="账单流水" background="transparent"></navigation-bar>
+
+<scroll-view class="page bill-page safe-bottom" scroll-y>
+  <view class="content">
+    <view class="bill-row card" wx:for="{{bills}}" wx:key="id">
+      <view>
+        <text>{{item.title}}</text>
+        <text>{{item.note}}</text>
+        <text>{{item.timeText}}</text>
+      </view>
+      <view>
+        <text class="{{item.amountClass}}">{{item.amountText}}</text>
+        <text>余额 {{item.balanceAfter}} 猫粮</text>
+      </view>
+    </view>
+    <view class="empty card" wx:if="{{!bills.length}}">
+      <text>暂无账单流水</text>
+      <text>后台预存、充值和下单消费会显示在这里</text>
+    </view>
+  </view>
+</scroll-view>

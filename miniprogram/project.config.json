@@ -1,0 +1,43 @@
+{
+    "appid": "touristappid",
+    "compileType": "miniprogram",
+    "libVersion": "3.16.1",
+    "packOptions": {
+        "ignore": [
+            {
+                "value": "assets_backup_before_compress_20260624014555",
+                "type": "folder"
+            },
+            {
+                "value": "customer-service",
+                "type": "folder"
+            },
+            {
+                "value": "assets/gift",
+                "type": "folder"
+            }
+        ],
+        "include": []
+    },
+    "setting": {
+        "urlCheck": true,
+        "coverView": true,
+        "es6": true,
+        "postcss": true,
+        "minified": true,
+        "enhance": true,
+        "showShadowRootInWxmlPanel": true,
+        "packNpmRelationList": [],
+        "babelSetting": {
+            "ignore": [],
+            "disablePlugins": [],
+            "outputPath": ""
+        }
+    },
+    "condition": {},
+    "editorSetting": {
+        "tabIndent": "insertSpaces",
+        "tabSize": 4
+    },
+    "projectname": "桂圆电竞"
+}

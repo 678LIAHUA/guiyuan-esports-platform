@@ -1,0 +1,38 @@
+<navigation-bar title="裁剪背景图" background="#111018" color="#ffffff"></navigation-bar>
+
+<view class="page crop-page">
+  <view class="crop-wrap">
+    <view
+      class="crop-frame"
+      bindtouchstart="onTouchStart"
+      bindtouchmove="onTouchMove"
+    >
+      <image class="crop-image" src="{{src}}" mode="aspectFill" style="{{imageStyle}}"></image>
+      <view class="crop-grid">
+        <view></view>
+        <view></view>
+        <view></view>
+        <view></view>
+      </view>
+    </view>
+    <view class="crop-tip">拖动图片选择显示区域，滑动调节缩放</view>
+  </view>
+
+  <view class="scale-card">
+    <text>缩放</text>
+    <slider
+      min="100"
+      max="300"
+      value="{{scaleValue}}"
+      activeColor="#8c59ff"
+      backgroundColor="#e6e2f4"
+      block-color="#ffffff"
+      block-size="24"
+      bindchanging="onScaleChange"
+      bindchange="onScaleChange"
+    />
+  </view>
+
+  <button class="save-btn" bindtap="saveCrop">确认使用</button>
+  <canvas canvas-id="cropCanvas" class="crop-canvas"></canvas>
+</view>

@@ -1,0 +1,77 @@
+page {
+  background: #f7f4ff;
+}
+
+.content {
+  padding: 22rpx 24rpx 120rpx;
+}
+
+.favorite-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18rpx;
+}
+
+.favorite-card {
+  min-height: 156rpx;
+  padding: 20rpx;
+  border-radius: 26rpx;
+  background: #fff;
+  display: grid;
+  grid-template-columns: 104rpx minmax(0, 1fr) auto;
+  gap: 18rpx;
+  align-items: center;
+  box-shadow: 0 12rpx 26rpx rgba(82, 63, 158, .08);
+}
+
+.favorite-card image {
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 26rpx;
+}
+
+.favorite-card view {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.favorite-card view text:first-child {
+  color: #171331;
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.favorite-card view text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #756d94;
+  font-size: 23rpx;
+  font-weight: 800;
+}
+
+.favorite-card > text {
+  color: #7357ee;
+  font-size: 23rpx;
+  font-weight: 900;
+}
+
+.empty {
+  min-height: 360rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14rpx;
+  color: #756d94;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.empty text:first-child {
+  color: #171331;
+  font-size: 30rpx;
+  font-weight: 900;
+}

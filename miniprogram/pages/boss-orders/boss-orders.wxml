@@ -1,0 +1,115 @@
+<navigation-bar title="我的订单" background="#f7f4ff"></navigation-bar>
+
+<scroll-view class="page boss-orders safe-bottom" scroll-y enable-flex>
+  <view class="content">
+    <view class="order-list" wx:if="{{hasOrders}}">
+      <view
+        class="order-card"
+        wx:for="{{orders}}"
+        wx:key="id"
+        data-group-id="{{item.id}}"
+        bindtap="openOrder"
+      >
+        <view class="order-head">
+          <view>
+            <text class="order-title">{{item.title}}</text>
+            <text class="order-no">订单号 {{item.orderNo}}</text>
+          </view>
+          <text class="status {{item.statusClass}}">{{item.statusText}}</text>
+        </view>
+        <view class="order-info">
+          <view>
+            <text>订单要求</text>
+            <text>{{item.requirementText}}</text>
+          </view>
+          <view>
+            <text>备注</text>
+            <text>{{item.remarkText}}</text>
+          </view>
+          <view>
+            <text>达人</text>
+            <text>{{item.playerText}}</text>
+          </view>
+        </view>
+        <view class="order-foot">
+          <text>更新 {{item.updatedAt}}</text>
+          <text>进入群聊 ›</text>
+        </view>
+        <button
+          wx:if="{{item.canReview}}"
+          class="review-btn"
+          data-order-no="{{item.orderNo}}"
+          catchtap="reviewOrder"
+        >评价达人</button>
+        <view wx:elif="{{item.reviewed}}" class="review-done">已评价</view>
+      </view>
+    </view>
+
+    <view class="empty" wx:else>
+      <text>暂无订单</text>
+      <text>下单后会在这里看到订单状态</text>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="review-mask" wx:if="{{reviewModalOpen}}" catchtap="closeReviewModal">
+  <view class="review-modal" catchtap="noop">
+    <view class="review-head">
+      <view>
+        <text>评价达人</text>
+        <text>{{reviewTargetOrder.title}} · {{reviewTargetOrder.playerText}}</text>
+      </view>
+      <button catchtap="closeReviewModal">×</button>
+    </view>
+
+    <view class="review-radar-card">
+      <view class="review-radar-title">
+        <text>综合评分 {{reviewAverage}}</text>
+        <text>五维评分会同步到达人能力图</text>
+      </view>
+      <view class="review-radar">
+        <view class="review-radar-fill" style="clip-path: polygon({{reviewPolygon}});"></view>
+        <view class="review-ring {{item.className}}" wx:for="{{reviewRingLines}}" wx:key="index" style="left: {{item.left}}; top: {{item.top}}; width: {{item.width}}; transform: {{item.transform}};"></view>
+        <view class="review-axis {{item.className}}" wx:for="{{reviewAxes}}" wx:key="index" style="left: {{item.left}}; top: {{item.top}}; width: {{item.width}}; transform: {{item.transform}};"></view>
+        <view class="review-line {{item.className}}" wx:for="{{reviewLines}}" wx:key="index" style="left: {{item.left}}; top: {{item.top}}; width: {{item.width}}; transform: {{item.transform}};"></view>
+        <view class="review-point" wx:for="{{reviewPoints}}" wx:key="index" style="left: {{item.left}}; top: {{item.top}};"></view>
+        <view class="review-label" wx:for="{{reviewLabels}}" wx:key="key" style="left: {{item.left}}; top: {{item.top}};">
+          <text>{{item.name}}</text>
+          <text>{{item.value}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="score-editor">
+      <view class="score-row" wx:for="{{reviewScores}}" wx:key="key">
+        <view>
+          <text>{{item.name}}</text>
+          <text>{{item.value}} / 10</text>
+        </view>
+        <slider
+          min="1"
+          max="10"
+          step="0.5"
+          value="{{item.value}}"
+          block-size="20"
+          activeColor="#7357ee"
+          backgroundColor="#ebe6ff"
+          data-key="{{item.key}}"
+          bindchanging="onReviewScoreChange"
+          bindchange="onReviewScoreChange"
+        />
+      </view>
+    </view>
+
+    <textarea
+      class="review-textarea"
+      value="{{reviewContent}}"
+      maxlength="300"
+      placeholder="写下本次服务评价"
+      placeholder-class="placeholder"
+      bindinput="onReviewContentInput"
+    ></textarea>
+
+    <button class="submit-review" loading="{{reviewSubmitting}}" bindtap="submitReview">提交评价</button>
+  </view>
+</view>

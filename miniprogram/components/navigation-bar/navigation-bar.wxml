@@ -1,0 +1,24 @@
+<view class="nav {{navClass}}" style="background: {{background}}; color: {{color}};">
+  <view class="nav-safe" style="height: {{safeTop}}px;"></view>
+  <view class="nav-inner" style="{{innerStyle}}">
+    <view class="nav-side nav-left">
+      <block wx:if="{{back}}">
+        <view class="nav-back" bindtap="back">‹</view>
+      </block>
+      <block wx:else>
+        <slot name="left"></slot>
+      </block>
+    </view>
+    <view class="nav-center">
+      <block wx:if="{{title}}">
+        <text>{{title}}</text>
+      </block>
+      <block wx:else>
+        <slot name="center"></slot>
+      </block>
+    </view>
+    <view class="nav-side nav-right">
+      <slot name="right"></slot>
+    </view>
+  </view>
+</view>

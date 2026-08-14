@@ -1,0 +1,53 @@
+<navigation-bar title="排行榜" back="{{false}}" background="transparent"></navigation-bar>
+
+<scroll-view class="page rank safe-bottom" scroll-y enable-flex type="list">
+  <view class="content">
+    <view class="tabs soft-card">
+      <view class="tab {{item.cls}}" wx:for="{{tabs}}" wx:key="type" data-type="{{item.type}}" bindtap="switchTab">{{item.name}}</view>
+    </view>
+
+    <view class="rank-note soft-card">
+      <text>{{summary}}</text>
+      <text>{{periodText || updateText}}</text>
+    </view>
+
+    <view class="rank-loading card" wx:if="{{loading}}">
+      <text>正在加载真实榜单</text>
+    </view>
+
+    <view class="podium card" wx:elif="{{top.length}}">
+      <view class="podium-item" wx:for="{{top}}" wx:key="name">
+        <view class="crown">{{item.rankText}}</view>
+        <image src="{{item.img}}" mode="aspectFill"></image>
+        <text class="name">{{item.name}}</text>
+        <text class="money">{{item.amount}} 猫粮</text>
+        <text class="orders">{{subMetricLabel}} {{item.orderCount}}</text>
+      </view>
+    </view>
+
+    <view class="rank-list card" wx:if="{{list.length}}">
+      <view class="rank-row" wx:for="{{list}}" wx:key="rank">
+        <text class="num">{{item.rank}}</text>
+        <image src="{{item.img}}" mode="aspectFill"></image>
+        <view class="info">
+          <text class="name">{{item.name}}</text>
+          <text>{{item.desc}}</text>
+        </view>
+        <view class="right">
+          <text>{{item.amount}} 猫粮</text>
+          <text>{{subMetricLabel}} {{item.orderCount}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="rank-empty card" wx:if="{{isEmpty && !loading}}">
+      <text>暂无真实榜单数据</text>
+      <text>产生订单、礼物或消费记录后自动更新</text>
+    </view>
+
+    <view class="mine-card soft-card">
+      <text>{{myRank}}</text>
+      <text>{{myAmount}}</text>
+    </view>
+  </view>
+</scroll-view>

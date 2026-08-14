@@ -1,0 +1,64 @@
+<navigation-bar title="{{tokenName}}充值" back="{{true}}" background="transparent"></navigation-bar>
+
+<scroll-view class="page recharge safe-bottom" scroll-y enable-flex type="list">
+  <view class="recharge-hero">
+    <button class="record-link" bindtap="showRecords">充值记录</button>
+    <view class="balance-label">
+      <text>我的{{tokenName}}</text>
+      <view class="help-dot">?</view>
+    </view>
+    <view class="balance-value">{{balance}}</view>
+    <view class="hero-gem"></view>
+  </view>
+
+  <view class="recharge-panel">
+    <view class="section-title">请选择购买数量</view>
+    <view class="tier-grid">
+      <view
+        class="tier-card {{selectedIndex === index ? 'active' : ''}}"
+        wx:for="{{tiers}}"
+        wx:key="yuan"
+        data-index="{{index}}"
+        bindtap="chooseTier"
+      >
+        <view class="token-side">
+          <image src="{{tokenIcon}}" mode="aspectFill"></image>
+          <text>{{item.tokenAmount}}</text>
+        </view>
+        <text class="yuan">￥{{item.yuanText}}</text>
+      </view>
+    </view>
+
+    <view class="custom-amount">
+      <input type="digit" value="{{customAmount}}" placeholder="请输入充值金额" bindinput="onCustomInput" />
+      <view class="custom-token">
+        <image src="{{tokenIcon}}" mode="aspectFill"></image>
+        <text>{{previewTokenAmount}}</text>
+      </view>
+    </view>
+
+    <view class="section-title pay-title">请选择支付方式</view>
+    <view class="pay-method selected">
+      <view class="wechat-icon">✓</view>
+      <text>{{payMethodText}}</text>
+      <view class="check-box">✓</view>
+    </view>
+
+    <view class="pending-recharge" wx:if="{{hasPendingRecharge}}">
+      <view>
+        <text>{{pendingRechargeText}}</text>
+        <text>{{pendingRechargeHint}}</text>
+      </view>
+      <button bindtap="showRecords">看流水</button>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="bottom-bar safe-bottom">
+  <button
+    class="contact-pay-btn"
+    loading="{{submitting}}"
+    disabled="{{submitting}}"
+    bindtap="submitRecharge"
+  >{{payMethodText}} {{payAmountText}}元</button>
+</view>

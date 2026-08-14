@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "猫粮充值",
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar"
+  }
+}

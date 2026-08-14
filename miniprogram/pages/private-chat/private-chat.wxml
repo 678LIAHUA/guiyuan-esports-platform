@@ -1,0 +1,45 @@
+<navigation-bar title="私聊达人" back="{{false}}" background="transparent"></navigation-bar>
+
+<view class="page private-chat">
+  <view class="chat-room" wx:if="{{player && chat}}">
+    <view class="chat-head card">
+      <button bindtap="back">‹</button>
+      <image src="{{player.avatar}}" mode="aspectFill"></image>
+      <view>
+        <text>{{player.name}}</text>
+        <text>ID {{player.id}} · {{player.level || player.rankValue || "达人"}}</text>
+      </view>
+      <text class="status {{player.statusClass}}">{{player.statusText}}</text>
+    </view>
+
+    <scroll-view class="message-list" scroll-y enable-flex scroll-into-view="{{chatBottomId}}">
+      <view
+        class="bubble-row {{item.role}}"
+        wx:for="{{chat.messages}}"
+        wx:key="id"
+      >
+        <view wx:if="{{item.showAvatar}}" class="chat-avatar-wrap">
+          <image wx:if="{{item.avatar}}" class="chat-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+          <text wx:else>{{item.avatarText}}</text>
+        </view>
+        <view class="bubble">
+          <view class="sender">{{item.sender}} · {{item.time}}</view>
+          <view class="text">{{item.text}}</view>
+        </view>
+      </view>
+      <view id="private-chat-bottom" class="chat-bottom-anchor"></view>
+    </scroll-view>
+
+    <view class="input-bar">
+      <input
+        value="{{inputText}}"
+        placeholder="给达人发消息"
+        placeholder-class="placeholder"
+        bindinput="onInput"
+        confirm-type="send"
+        bindconfirm="sendMessage"
+      />
+      <button bindtap="sendMessage">发送</button>
+    </view>
+  </view>
+</view>

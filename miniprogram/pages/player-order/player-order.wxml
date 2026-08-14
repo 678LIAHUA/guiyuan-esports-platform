@@ -1,0 +1,87 @@
+<navigation-bar title="指定下单" background="#f7f4ff" color="#191633"></navigation-bar>
+
+<scroll-view class="page appoint-order safe-bottom" scroll-y enable-flex>
+  <view class="content" wx:if="{{player}}">
+    <view class="player-card">
+      <image class="avatar" src="{{player.avatar}}" mode="aspectFill"></image>
+      <view>
+        <view class="player-name">{{player.name}}</view>
+        <view class="player-desc">已选定达人，选择价位和服务时长即可下单</view>
+      </view>
+      <view class="price">
+        <text>{{selectedTier.price}}</text>
+        <text>猫粮/小时</text>
+      </view>
+    </view>
+
+    <view class="order-panel">
+      <view class="section-title">价位选择</view>
+      <view class="tier-grid">
+        <view
+          class="tier-item {{selectedTierIndex === index ? 'active' : ''}}"
+          wx:for="{{player.priceTiers}}"
+          wx:key="id"
+          data-index="{{index}}"
+          bindtap="selectTier"
+        >
+          <view>
+            <text>{{item.name}}</text>
+            <text>{{item.desc || player.level}}</text>
+          </view>
+          <view>
+            <text>{{item.price}}</text>
+            <text>猫粮</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="stepper-row">
+        <view>
+          <text>服务时长</text>
+          <text>按整小时下单，少玩的部分按分钟退款</text>
+        </view>
+        <view class="stepper">
+          <button class="{{orderedHours <= 1 ? 'disabled' : ''}}" data-step="-1" bindtap="changeHour">-</button>
+          <text>{{durationName}}</text>
+          <button data-step="1" bindtap="changeHour">+</button>
+        </view>
+      </view>
+
+      <view class="billing-card">
+        <view>
+          <text>整小时预扣</text>
+          <text>{{prepaidPrice}} 猫粮</text>
+        </view>
+        <view>
+          <text>退款单价</text>
+          <text>{{minutePriceText}} 猫粮/分钟</text>
+        </view>
+        <view>
+          <text>退款规则</text>
+          <text>少玩退回</text>
+        </view>
+      </view>
+
+      <view class="remark-box">
+        <view class="section-title">备注</view>
+        <textarea
+          value="{{remark}}"
+          placeholder="可以写想玩的地图、时间、语音要求或其他偏好"
+          placeholder-class="remark-placeholder"
+          maxlength="120"
+          auto-height="{{false}}"
+          bindinput="onRemarkInput"
+        ></textarea>
+        <view class="remark-count">{{remarkLength}}/120</view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="bottom-submit safe-bottom">
+  <view>
+    <text>本次先扣</text>
+    <text>{{prepaidPrice}} 猫粮</text>
+  </view>
+  <button bindtap="submitOrder">确认付款</button>
+</view>

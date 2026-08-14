@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>桂圆电竞客服中台</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main id="loginView" class="login-view">
+      <section class="login-panel">
+        <div class="brand-mark">Y</div>
+        <h1>桂圆电竞客服中台</h1>
+        <p>员工登录后可处理小程序群消息、发送陪玩详情，并跟进订单状态。</p>
+        <form id="loginForm" class="login-form">
+          <label>
+            <span>账号</span>
+            <input id="username" autocomplete="username" placeholder="请输入客服账号" />
+          </label>
+          <label>
+            <span>密码</span>
+            <input id="password" type="password" autocomplete="current-password" placeholder="请输入密码" />
+          </label>
+          <button type="submit">登录客服后台</button>
+          <div id="loginError" class="form-error"></div>
+        </form>
+      </section>
+    </main>
+
+    <main id="appView" class="app-shell hidden">
+      <aside class="admin-rail">
+        <div class="rail-brand">Y</div>
+        <button id="railChatBtn" class="rail-item active" data-module="chat">
+          <span>会</span>
+          <small>会话</small>
+        </button>
+        <button id="railOrdersBtn" class="rail-item" data-module="orders">
+          <span>单</span>
+          <small>订单</small>
+        </button>
+        <button id="railStaffOrderBtn" class="rail-item" data-module="staffOrder">
+          <span>代</span>
+          <small>代下</small>
+        </button>
+      </aside>
+      <aside class="support-sub-nav">
+        <div class="sub-title">客服</div>
+        <button class="support-sub-item active" data-module="chat">小程序群消息</button>
+        <button class="support-sub-item" data-module="orders">订单管理</button>
+        <button class="support-sub-item" data-module="staffOrder">客服代下单</button>
+      </aside>
+
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">桂圆电竞后台</div>
+          <h1>客服与订单管理</h1>
+        </div>
+        <nav class="module-tabs">
+          <button id="chatModuleBtn" class="module-tab active" data-module="chat">小程序群消息</button>
+          <button id="ordersModuleBtn" class="module-tab" data-module="orders">订单管理</button>
+          <button id="staffOrderModuleBtn" class="module-tab" data-module="staffOrder">客服代下单</button>
+        </nav>
+        <div class="account-cluster">
+          <button id="onlineToggleBtn" class="online-toggle" type="button">
+            <span class="status-dot"></span>
+            <strong id="onlineToggleText">在线</strong>
+          </button>
+          <button id="accountBtn" class="account-chip" type="button">
+            <span id="accountAvatar" class="account-avatar">客</span>
+            <span class="account-text">
+              <strong id="accountName">客服</strong>
+              <small id="accountUsername">admin</small>
+            </span>
+          </button>
+          <button id="logoutBtn" class="ghost-btn">退出</button>
+        </div>
+      </header>
+
+      <section id="chatModule" class="module-view inbox-page">
+        <section class="inbox-shell">
+          <header class="inbox-head">
+            <div>
+              <div class="eyebrow">群聊列表</div>
+              <h2>小程序群消息</h2>
+            </div>
+            <div class="inbox-actions">
+              <input id="sessionSearch" placeholder="搜索用户、标签、渠道" />
+              <select id="statusFilter">
+                <option value="all">全部状态</option>
+                <option value="open">接待中</option>
+                <option value="pending">待跟进</option>
+                <option value="closed">已关闭</option>
+              </select>
+            </div>
+          </header>
+          <section id="stats" class="stats-grid"></section>
+          <section class="inbox-workbench">
+            <div class="inbox-main">
+              <div class="section-title">
+                <div>
+                  <strong>接待队列</strong>
+                  <span>按最近消息排序，集中处理小程序群里的咨询和订单沟通</span>
+                </div>
+              </div>
+              <div class="inbox-tabs">
+                <button class="inbox-tab active" data-inbox="all">全部</button>
+                <button class="inbox-tab" data-inbox="unread">未读</button>
+                <button class="inbox-tab" data-inbox="waiting">待回</button>
+                <button class="inbox-tab" data-inbox="overdue">超时</button>
+              </div>
+              <section id="sessionList" class="session-list session-grid"></section>
+            </div>
+            <aside class="ops-aside">
+              <section class="ops-card">
+                <div class="ops-card-head">
+                  <strong>今日提醒</strong>
+                  <span>自动更新</span>
+                </div>
+                <div id="todayTodoList" class="todo-list"></div>
+              </section>
+              <section class="ops-card">
+                <div class="ops-card-head">
+                  <strong>订单提醒</strong>
+                  <span>关联处理</span>
+                </div>
+                <div id="orderTodoList" class="todo-list"></div>
+              </section>
+            </aside>
+          </section>
+        </section>
+      </section>
+
+      <section id="chatDetailModule" class="chat-detail-page module-view hidden">
+        <section class="chat">
+        <header class="chat-head">
+          <button id="backToChatsBtn" class="ghost-btn chat-back">群聊列表</button>
+          <div>
+            <div id="chatChannel" class="eyebrow">小程序群聊</div>
+            <h1 id="chatTitle">请选择会话</h1>
+            <p id="chatMeta">先从左侧选择一个群聊，再进入沟通。</p>
+          </div>
+          <div class="chat-actions">
+            <select id="statusSelect">
+              <option value="open">接待中</option>
+              <option value="pending">待跟进</option>
+              <option value="closed">已关闭</option>
+            </select>
+          </div>
+        </header>
+
+        <section id="messageList" class="message-list">
+          <div class="empty-state chat-empty">
+            <strong>请选择群聊</strong>
+            <span>左侧是全部小程序群聊和咨询会话，点进来后再沟通。</span>
+          </div>
+        </section>
+
+        <footer class="composer">
+          <div id="quickReplies" class="quick-replies"></div>
+          <textarea id="replyInput" placeholder="输入客服回复，Enter 发送，Shift+Enter 换行"></textarea>
+          <div class="composer-actions">
+            <button id="sendCardBtn" class="soft-btn">发送详情卡</button>
+            <button id="sendBtn" class="primary-btn">发送</button>
+          </div>
+        </footer>
+        </section>
+
+        <aside class="detail-panel">
+        <section class="panel-block">
+          <div class="block-head">
+            <h3>客户资料</h3>
+            <button id="saveProfileBtn" class="mini-btn">保存</button>
+          </div>
+          <div class="profile-form">
+            <label>
+              <span>客户ID</span>
+              <input id="profileUserId" placeholder="客户6位ID" />
+            </label>
+            <label>
+              <span>昵称</span>
+              <input id="profileName" />
+            </label>
+            <label>
+              <span>联系方式</span>
+              <input id="profileContact" />
+            </label>
+            <label>
+              <span>标签，逗号分隔</span>
+              <input id="profileTags" />
+            </label>
+            <label>
+              <span>客服备注</span>
+              <textarea id="profileRemark"></textarea>
+            </label>
+          </div>
+          <div class="customer-wallet">
+            <div class="wallet-head">
+              <div>
+                <span>客户余额</span>
+                <strong id="customerBalanceText">￥0</strong>
+              </div>
+              <button id="refreshCustomerWalletBtn" class="mini-btn" type="button">刷新</button>
+            </div>
+            <div class="wallet-adjust hidden">
+              <input id="customerBalanceAmount" type="number" step="0.01" placeholder="充值人民币金额" />
+              <input id="customerBalanceNote" placeholder="备注来源，例如 微信转账 / 活动补偿" />
+              <button id="addCustomerBalanceBtn" class="primary-btn" type="button">添加余额</button>
+            </div>
+            <div id="customerBillMiniList" class="customer-bills-mini"></div>
+          </div>
+          <div class="staff-order-card">
+            <div class="wallet-head">
+              <div>
+                <span>客服代下 / 派单</span>
+                <strong id="staffOrderBalanceInfo">先输入老板ID查询余额</strong>
+              </div>
+              <button id="staffOrderLookupBtn" class="mini-btn" type="button">查余额</button>
+            </div>
+            <div class="staff-order-mode">
+              <label><input type="radio" name="staffOrderMode" value="customer_balance" checked /> 老板有小程序账号</label>
+              <label><input type="radio" name="staffOrderMode" value="offline_cash" /> 私下收钱直接派单</label>
+            </div>
+            <div class="staff-order-form">
+              <input id="staffOrderCustomerId" placeholder="老板ID，余额扣款必填" />
+              <input id="staffOrderContact" placeholder="联系方式 / 群备注" />
+              <select id="staffOrderSkillSelect"></select>
+              <select id="staffOrderPlaySelect"></select>
+              <select id="staffOrderItemSelect"></select>
+              <select id="staffOrderTierSelect"></select>
+              <input id="staffOrderPlayerSearch" placeholder="搜索指定打手名字 / ID，可不填" autocomplete="off" />
+              <input id="staffOrderPlayerId" type="hidden" />
+              <div id="staffOrderPlayerResults" class="staff-order-player-results"></div>
+              <input id="staffOrderDuration" type="number" min="1" step="1" value="1" placeholder="小时/数量" />
+              <input id="staffOrderPlayerName" placeholder="指定打手，可不填" />
+              <input id="staffOrderPaymentRemark" placeholder="下单方式备注，例如 微信已收 / 余额扣款" />
+              <textarea id="staffOrderNote" placeholder="客服备注，派单时会写进订单备注"></textarea>
+            </div>
+            <div class="staff-order-summary" id="staffOrderSummary">选择订单后显示金额</div>
+            <button id="staffOrderSubmitBtn" class="primary-btn" type="button">确认代下 / 派单</button>
+          </div>
+          <div id="slaBox" class="sla-box"></div>
+        </section>
+
+        <section class="panel-block">
+          <div class="block-head">
+            <h3>服务详情卡</h3>
+          </div>
+          <div id="serviceCards" class="service-cards"></div>
+        </section>
+
+        <section class="panel-block">
+          <div class="block-head">
+            <h3>快捷话术</h3>
+          </div>
+          <div class="quick-editor">
+            <input id="quickReplyInput" placeholder="新增一句快捷回复" />
+            <button id="addQuickReplyBtn" class="mini-btn">新增</button>
+          </div>
+          <div id="quickReplyManager" class="quick-manager"></div>
+        </section>
+
+        <section class="panel-block">
+          <div class="block-head">
+            <h3>关联订单</h3>
+            <button id="refreshOrders" class="mini-btn">刷新</button>
+          </div>
+          <div id="orderList" class="compact-list"></div>
+        </section>
+        </aside>
+      </section>
+
+      <section id="staffOrderModule" class="staff-order-module module-view hidden">
+        <section class="orders-head">
+          <div>
+            <div class="eyebrow">客服代下单</div>
+            <h2>代老板下单 / 私下收款派单</h2>
+          </div>
+        </section>
+        <section class="staff-order-page-grid">
+          <div id="staffOrderMount"></div>
+          <aside class="staff-order-help">
+            <section class="panel-block">
+              <h3>操作说明</h3>
+              <div class="staff-order-tips">
+                <p><strong>老板有小程序账号：</strong>输入老板ID，系统从对应余额扣款，并写入老板账单流水。</p>
+                <p><strong>私下收钱：</strong>不扣余额，直接生成派单订单，订单备注会标记收款方式。</p>
+                <p><strong>派单备注：</strong>下单方式、收款备注、客服备注都会同步到订单管理。</p>
+              </div>
+            </section>
+          </aside>
+        </section>
+      </section>
+
+      <section id="ordersModule" class="orders-module module-view hidden">
+        <section class="orders-head">
+          <div>
+            <div class="eyebrow">订单管理</div>
+            <h2>我的订单</h2>
+          </div>
+          <div id="orderStats" class="order-stats"></div>
+        </section>
+
+        <section class="order-toolbar">
+          <input id="orderSearch" placeholder="搜索订单号、用户、陪玩、游戏、平台" />
+          <select id="orderStatusFilter">
+            <option value="all">全部状态</option>
+            <option value="待确认">待确认</option>
+            <option value="已确认">已确认</option>
+            <option value="已完成">已完成</option>
+            <option value="已取消">已取消</option>
+          </select>
+          <select id="orderSourceFilter">
+            <option value="all">全部来源</option>
+            <option value="小程序">小程序</option>
+          </select>
+          <select id="orderPlatformFilter">
+            <option value="all">全部平台</option>
+          </select>
+          <select id="orderGameFilter">
+            <option value="all">全部游戏</option>
+          </select>
+          <input id="orderDateFrom" type="date" />
+          <input id="orderDateTo" type="date" />
+          <input id="orderAmountMin" type="number" min="0" placeholder="最低金额" />
+          <input id="orderAmountMax" type="number" min="0" placeholder="最高金额" />
+          <select id="orderSort">
+            <option value="createdAt-desc">下单时间倒序</option>
+            <option value="createdAt-asc">下单时间正序</option>
+            <option value="amount-desc">实付金额高到低</option>
+            <option value="amount-asc">实付金额低到高</option>
+          </select>
+          <button id="resetOrderFiltersBtn" class="soft-btn">重置筛选</button>
+          <button id="exportOrdersBtn" class="soft-btn">导出 CSV</button>
+          <button id="refreshOrderTableBtn" class="primary-btn">刷新订单</button>
+        </section>
+
+        <section class="order-table-wrap">
+          <table class="order-table">
+            <colgroup>
+              <col class="col-date" />
+              <col class="col-id" />
+              <col class="col-user" />
+              <col class="col-player" />
+              <col class="col-service" />
+              <col class="col-platform" />
+              <col class="col-unit" />
+              <col class="col-duration" />
+              <col class="col-amount" />
+              <col class="col-commission" />
+              <col class="col-income" />
+              <col class="col-config" />
+              <col class="col-status" />
+              <col class="col-source" />
+              <col class="col-note" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th>订单日期</th>
+                <th>订单号</th>
+                <th>用户</th>
+                <th>陪玩账号</th>
+                <th>服务项目</th>
+                <th>平台</th>
+                <th>单价</th>
+                <th>时长</th>
+                <th>订单原价</th>
+                <th>平台抽成</th>
+                <th>打手收入</th>
+                <th>收入配置</th>
+                <th>订单状态</th>
+                <th>处理人</th>
+                <th>备注</th>
+              </tr>
+            </thead>
+            <tbody id="orderTableBody"></tbody>
+          </table>
+        </section>
+      </section>
+
+    </main>
+
+    <dialog id="accountModal" class="modal account-modal">
+      <form method="dialog">
+        <div class="modal-head">
+          <div>
+            <div class="eyebrow">个人资料</div>
+            <h3>账号设置</h3>
+          </div>
+          <button id="closeAccountModalBtn" class="icon-btn" type="button" aria-label="关闭">×</button>
+        </div>
+
+        <section class="account-setting-block">
+          <div class="avatar-editor">
+            <span id="accountModalAvatar" class="account-avatar large">客</span>
+            <div>
+              <strong>客服头像</strong>
+              <span>支持本地图片上传，也可以清空后使用名称首字。</span>
+              <div class="inline-actions">
+                <label class="mini-btn file-btn">
+                  上传头像
+                  <input id="avatarInput" type="file" accept="image/*" />
+                </label>
+                <button id="clearAvatarBtn" class="mini-btn" type="button">清空</button>
+              </div>
+            </div>
+          </div>
+          <label>
+            <span>客服名称</span>
+            <input id="accountDisplayName" maxlength="18" />
+          </label>
+          <label>
+            <span>登录账号</span>
+            <input id="accountLoginName" disabled />
+          </label>
+          <button id="saveAccountBtn" class="primary-btn" type="button">保存资料</button>
+        </section>
+
+        <section class="account-setting-block">
+          <div class="settings-panel-head">
+            <div>
+              <strong>账号安全</strong>
+              <span>修改后下次登录需要使用新密码。</span>
+            </div>
+          </div>
+          <label>
+            <span>原密码</span>
+            <input id="oldPasswordInput" type="password" autocomplete="current-password" />
+          </label>
+          <label>
+            <span>新密码</span>
+            <input id="newPasswordInput" type="password" autocomplete="new-password" />
+          </label>
+          <label>
+            <span>确认新密码</span>
+            <input id="confirmPasswordInput" type="password" autocomplete="new-password" />
+          </label>
+          <button id="savePasswordBtn" class="soft-btn" type="button">修改密码</button>
+        </section>
+      </form>
+    </dialog>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<navigation-bar title="{{title}}" back="{{true}}" background="#f7f4ff"></navigation-bar>
+
+<view class="page game-orders safe-bottom">
+  <view class="game-head" wx:if="{{game}}">
+    <image class="game-logo" src="{{game.iconUrl}}" mode="aspectFit"></image>
+    <view class="game-copy">
+      <view class="game-name">{{game.name}}</view>
+      <view class="game-tip">选择想下的单子，详情和快速下单流程一致</view>
+    </view>
+  </view>
+
+  <view class="order-layout" wx:if="{{orders.length}}">
+    <scroll-view class="category-panel" scroll-y enable-flex>
+      <view
+        class="category-item {{item.cls}}"
+        wx:for="{{categories}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="chooseCategory"
+      >
+        <text>{{item.name}}</text>
+      </view>
+    </scroll-view>
+
+    <scroll-view class="goods-panel" scroll-y enable-flex>
+      <view
+        class="goods-card"
+        wx:for="{{goods}}"
+        wx:key="id"
+        data-id="{{item.id}}"
+        bindtap="openOrder"
+      >
+        <image class="goods-img" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        <view class="goods-info">
+          <view class="goods-title">{{item.title}}</view>
+          <view class="goods-desc">{{item.desc}}</view>
+          <view class="goods-meta">
+            <text class="goods-tag">{{item.tag}}</text>
+            <text>{{item.note}}</text>
+          </view>
+          <view class="goods-foot">
+            <view class="price-box">
+              <text class="price-label">价格</text>
+              <text class="now-price">{{item.priceText}}</text>
+            </view>
+            <view class="order-btn">查看</view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="empty" wx:else>
+    <view class="empty-title">{{emptyText}}</view>
+    <view class="empty-desc">后台上架该游戏单子后会自动展示在这里</view>
+  </view>
+</view>

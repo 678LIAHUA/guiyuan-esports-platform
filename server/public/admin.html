@@ -1,0 +1,731 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>桂圆电竞总后台</title>
+    <link rel="stylesheet" href="./admin.css" />
+  </head>
+  <body>
+    <main id="loginView" class="login-view">
+      <section class="login-panel">
+        <div class="brand">Y</div>
+        <h1>桂圆电竞总后台</h1>
+        <p>统一管理小程序、客服网站和运营数据。</p>
+        <form id="loginForm" class="form-grid">
+          <label>
+            <span>总后台账号</span>
+            <input id="username" autocomplete="username" placeholder="请输入管理员账号" />
+          </label>
+          <label>
+            <span>密码</span>
+            <input id="password" type="password" autocomplete="current-password" placeholder="请输入密码" />
+          </label>
+          <button class="primary-btn" type="submit">登录总后台</button>
+          <div id="loginError" class="error-text"></div>
+        </form>
+      </section>
+    </main>
+
+    <main id="adminApp" class="admin-shell hidden">
+      <aside class="side-nav">
+        <div class="side-brand"><span>桂圆电竞</span></div>
+        <button class="nav-item active" data-view="overview" data-icon="◆">统计</button>
+        <button class="nav-item" data-view="users" data-icon="●">用户</button>
+        <button class="nav-item" data-view="invites" data-icon="↗">分销</button>
+        <button class="nav-item" data-view="orders" data-icon="≡">订单</button>
+        <button class="nav-item" data-view="games" data-icon="▣">商品</button>
+        <button class="nav-item" data-view="players" data-icon="★">打手</button>
+        <button class="nav-item" data-view="finance" data-icon="￥">财务</button>
+        <button class="nav-item" data-view="staff" data-icon="☎">客服</button>
+        <button class="nav-item" data-view="home" data-icon="▦">装修</button>
+        <button class="nav-item" data-view="settings" data-icon="⚙">设置</button>
+      </aside>
+      <aside id="adminSubNav" class="sub-nav"></aside>
+
+      <header class="topbar">
+        <div>
+          <h1 id="pageTitle">统计 / 综合面板</h1>
+        </div>
+        <div class="top-actions">
+          <a class="soft-link" href="./index.html">客服后台</a>
+          <button id="logoutBtn" class="ghost-btn">退出</button>
+        </div>
+      </header>
+      <nav id="adminTabs" class="admin-tabs"></nav>
+
+      <section id="overviewView" class="view">
+        <section class="welcome-card">
+          <div>
+            <div class="welcome-kicker">后台管理系统</div>
+            <h2>欢迎回来，超级管理员！</h2>
+            <p>统一管理小程序、客服网站、订单和陪玩服务，关键数据在这里集中处理。</p>
+          </div>
+          <div class="rocket-mark">Y</div>
+        </section>
+        <div id="statsGrid" class="stats-grid"></div>
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>平台联动</strong>
+              <span>总后台修改后，小程序目录和客服详情卡会同步读取最新数据。</span>
+            </div>
+          </div>
+          <div class="link-grid">
+            <article><strong>小程序</strong><span>游戏分类、陪玩列表、套餐价格</span></article>
+            <article><strong>客服网站</strong><span>客服账号、群聊接待、订单处理</span></article>
+            <article><strong>总后台</strong><span>最高权限、基础设置、运营数据</span></article>
+          </div>
+        </section>
+      </section>
+
+      <section id="usersView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>用户中心</strong>
+              <span>查看客户余额、账单流水和会员等级，也可以给客户后台预存人民币金额。</span>
+            </div>
+          </div>
+          <div class="user-search-bar">
+            <input id="customerSearchInput" placeholder="搜索客户ID / 昵称 / 会员等级" />
+            <button id="clearCustomerSearchBtn" class="soft-btn" type="button">清空</button>
+          </div>
+          <div id="adminUserList" class="record-list"></div>
+          <section class="member-config-panel">
+            <div class="sub-head">会员等级配置</div>
+            <div id="memberLevelList" class="record-list tight-list"></div>
+            <form id="memberLevelForm" class="toolbar-grid member-level-toolbar">
+              <input id="memberLevelName" placeholder="等级名称，例如 黑金会员" />
+              <input id="memberLevelThreshold" type="number" min="0" step="0.01" placeholder="解锁阈值：消费人民币金额" />
+              <input id="memberLevelDiscount" type="number" min="1" max="100" step="1" placeholder="折扣%，例如 88" />
+              <input id="memberLevelImage" placeholder="会员卡图片 URL" />
+              <button class="soft-btn" type="submit">新增等级</button>
+              <button id="saveMemberLevelsBtn" class="soft-btn" type="button">保存等级</button>
+            </form>
+          </section>
+        </section>
+      </section>
+
+      <section id="financeView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>财务中心</strong>
+              <span>每一笔订单都能看到老板实付、打手收入和平台利润。</span>
+            </div>
+          </div>
+          <div id="financeStats" class="stats-grid inner-stats"></div>
+          <div class="finance-filter-bar">
+            <label><span>开始日期</span><input id="financeStartDate" type="date" /></label>
+            <label><span>结束日期</span><input id="financeEndDate" type="date" /></label>
+            <label><span>搜索</span><input id="financeKeyword" placeholder="订单号 / 老板 / 打手" /></label>
+            <button id="clearFinanceFilterBtn" class="soft-btn" type="button">清空</button>
+          </div>
+          <div class="admin-table-wrap finance-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>订单</th>
+                  <th>老板</th>
+                  <th>打手/服务</th>
+                  <th>老板实付</th>
+                  <th>打手收入</th>
+                  <th>平台盈利</th>
+                  <th>状态</th>
+                </tr>
+              </thead>
+              <tbody id="financeFlowTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="staffView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>客服账号</strong>
+              <span>新增客服后，可直接登录客服网站处理群聊和订单。</span>
+            </div>
+          </div>
+          <form id="staffForm" class="toolbar-grid">
+            <input id="staffName" placeholder="客服名称" />
+            <input id="staffUsername" placeholder="登录账号" />
+            <input id="staffPassword" type="password" minlength="8" autocomplete="new-password" placeholder="初始密码（至少 8 位）" />
+            <button class="primary-btn" type="submit">新增客服</button>
+          </form>
+          <div id="staffList" class="record-list"></div>
+        </section>
+      </section>
+
+      <section id="homeView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>小程序首页配置</strong>
+              <span>公告和套餐会同步影响首页展示、详情下单和客服介绍口径。</span>
+            </div>
+            <button id="saveHomeBtn" class="primary-btn">保存首页配置</button>
+          </div>
+          <div class="admin-edit-preview-layout">
+            <div class="admin-edit-column">
+              <div class="home-config-grid">
+                <section>
+                  <div class="sub-head">首页公告</div>
+                  <div id="noticeList" class="record-list tight-list"></div>
+                  <button id="addNoticeBtn" class="soft-btn">新增公告</button>
+                </section>
+              </div>
+            </div>
+            <aside class="mini-preview-panel">
+              <div class="mini-preview-head">
+                <strong>小程序首页模拟</strong>
+                <span>左侧修改后实时预览</span>
+              </div>
+              <div id="homeMiniPreview" class="mini-phone"></div>
+            </aside>
+          </div>
+        </section>
+      </section>
+
+      <section id="messagesView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>消息管理</strong>
+              <span>客服群聊、未读消息和待回复会话。</span>
+            </div>
+            <a class="soft-link" href="./index.html">进入客服后台</a>
+          </div>
+          <div id="messageList" class="record-list"></div>
+        </section>
+      </section>
+
+      <section id="complaintsView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>投诉信息</strong>
+              <span>小程序用户提交的举报会集中显示在这里，包含投诉人、被投诉打手、时间和内容。</span>
+            </div>
+          </div>
+          <div id="complaintList" class="record-list"></div>
+        </section>
+      </section>
+
+      <section id="gamesView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>小程序商品结构</strong>
+              <span>对应小程序：首页游戏入口、其他游戏列表、游戏内左侧分类、右侧订单卡和详情页价位。</span>
+            </div>
+            <button id="addGameBtn" class="soft-btn">新增游戏</button>
+          </div>
+          <div class="admin-edit-preview-layout">
+            <div class="admin-edit-column">
+              <div class="sub-head">首页游戏入口 / 其他游戏</div>
+              <div id="gameList" class="game-admin-list"></div>
+              <section class="catalog-config-grid">
+                <section>
+                  <div class="sub-head">当前游戏的左侧分类</div>
+                  <div id="orderCategoryList" class="record-list tight-list"></div>
+                  <button id="addOrderCategoryBtn" class="soft-btn" type="button">新增子分类</button>
+                </section>
+                <section>
+                  <div class="sub-head">当前分类的订单卡 / 详情价位</div>
+                  <div id="orderItemList" class="record-list tight-list"></div>
+                  <button id="addOrderItemBtn" class="soft-btn" type="button">新增订单类型</button>
+                </section>
+              </section>
+              <button id="saveGamesBtn" class="primary-btn footer-action">保存分类和订单</button>
+            </div>
+            <aside class="mini-preview-panel">
+              <div class="mini-preview-head">
+                <strong>订单分类模拟</strong>
+                <span>和小程序分类页保持同屏对应</span>
+              </div>
+              <div id="gamesMiniPreview" class="mini-phone"></div>
+            </aside>
+          </div>
+        </section>
+      </section>
+
+      <section id="playersView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>查找修改打手</strong>
+              <span>搜索打手后直接改资料、等级、绑定微信和人民币余额，对应小程序打手资料与工作台。</span>
+            </div>
+            <button class="soft-btn" data-view-jump="playerCreate" type="button">去新增打手</button>
+          </div>
+          <section class="revenue-config-panel">
+            <div class="sub-head">收入配置模板</div>
+            <div id="revenueConfigList" class="record-list tight-list"></div>
+            <form id="revenueConfigForm" class="toolbar-grid revenue-toolbar">
+              <input id="revenueConfigName" placeholder="配置名称，例如 配置一" />
+              <input id="revenueConfigPlayerRate" type="number" min="0" max="100" step="1" placeholder="打手收入占比%，例如 80" />
+              <button class="soft-btn" type="submit">新增配置</button>
+            </form>
+            <div class="bulk-config-row">
+              <select id="bulkRevenueConfig"></select>
+              <button id="saveRevenueConfigsBtn" class="soft-btn" type="button">保存配置修改</button>
+              <button id="applyBulkRevenueBtn" class="soft-btn" type="button">批量应用到勾选打手</button>
+            </div>
+          </section>
+          <section id="playerListPanel" class="player-list-panel">
+            <div class="sub-head">打手等级价格</div>
+            <div class="level-config-tip">每个打手同时拥有 1 个机密等级和 1 个绝密等级，四档固定等级价格会同步到小程序下单和打手工作台。</div>
+            <div id="playerLevelList" class="player-level-config"></div>
+            <div class="player-level-actions">
+              <button id="savePlayerLevelsBtn" class="soft-btn" type="button">保存等级价格</button>
+            </div>
+            <div class="player-filter-bar">
+              <input id="playerSearchInput" placeholder="搜索打手名称 / ID" />
+              <select id="playerLevelFilter"></select>
+              <button id="resetPlayerFilterBtn" class="soft-btn" type="button">重置筛选</button>
+            </div>
+            <div class="admin-table-wrap player-table-wrap">
+              <table class="admin-table player-table">
+                <thead>
+                  <tr>
+                    <th>选择</th>
+                    <th>打手名称</th>
+                    <th>ID</th>
+                    <th>机密等级</th>
+                    <th>绝密等级</th>
+                    <th>首页展示</th>
+                    <th>收入配置</th>
+                    <th>余额</th>
+                    <th>操作</th>
+                  </tr>
+                </thead>
+                <tbody id="playerList"></tbody>
+              </table>
+            </div>
+          </section>
+          <section id="playerDetailPanel" class="player-detail-panel hidden">
+            <div class="detail-head">
+              <div>
+                <div class="sub-head">打手信息</div>
+                <span id="playerDetailMeta">二级详情</span>
+              </div>
+              <button id="backToPlayerListBtn" class="soft-btn" type="button">返回列表</button>
+            </div>
+            <form id="playerDetailForm" class="player-detail-form">
+              <label><span>ID</span><input id="detailPlayerId" /></label>
+              <label><span>昵称</span><input id="detailPlayerName" /></label>
+              <label><span>标题</span><input id="detailPlayerTitle" /></label>
+              <label><span>游戏</span><select id="detailPlayerGame"></select></label>
+              <label><span>机密等级</span><select id="detailPlayerConfidentialLevel"></select></label>
+              <label><span>绝密等级</span><select id="detailPlayerTopSecretLevel"></select></label>
+              <label><span>首页排序</span><input id="detailPlayerHomeSort" type="number" min="0" placeholder="数字越小越靠前" /></label>
+              <label class="switch-field"><input id="detailPlayerShowOnHome" type="checkbox" checked /><span>首页热门达人展示</span></label>
+              <label><span>收入配置</span><select id="detailPlayerRevenueConfig"></select></label>
+              <label><span>工作台密钥</span><input id="detailPlayerSecret" placeholder="6位以上密钥" /></label>
+              <label><span>绑定微信OpenID</span><input id="detailPlayerWorkbenchOpenid" placeholder="清空保存即可解绑" /></label>
+              <label><span>用用户ID绑定</span><input id="detailPlayerBindCustomerId" placeholder="输入小程序6位用户ID" /></label>
+              <div class="player-bind-tools">
+                <button id="bindPlayerCustomerBtn" class="soft-btn" type="button">绑定为该打手微信</button>
+                <span id="detailPlayerBindMeta">未绑定用户ID</span>
+              </div>
+              <label><span>小时价（按机密等级自动）</span><input id="detailPlayerPrice" type="number" min="0" disabled /></label>
+              <label><span>销量</span><input id="detailPlayerSold" type="number" min="0" /></label>
+              <label><span>订单收入人民币（可提现）</span><input id="detailPlayerEarnedBalance" type="number" min="0" step="0.01" /></label>
+              <label><span>充值人民币（不可提现）</span><input id="detailPlayerRechargeBalance" type="number" min="0" step="0.01" /></label>
+              <label><span>提现冻结</span><input id="detailPlayerPendingWithdraw" type="number" min="0" disabled /></label>
+              <label class="wide"><span>标签，逗号分隔</span><input id="detailPlayerTags" /></label>
+              <label class="wide"><span>档期，逗号分隔</span><input id="detailPlayerSchedule" /></label>
+              <label class="wide"><span>介绍</span><textarea id="detailPlayerIntro"></textarea></label>
+              <div class="detail-actions">
+                <button class="primary-btn" type="submit">保存打手信息</button>
+                <button id="deleteDetailPlayerBtn" class="danger-btn" type="button">删除打手</button>
+              </div>
+            </form>
+          </section>
+        </section>
+      </section>
+
+      <section id="playerCreateView" class="view hidden">
+        <section class="panel narrow-panel">
+          <div class="panel-head">
+            <div>
+              <strong>新增打手</strong>
+              <span>只填上线必需信息，保存后可回到查找修改页继续补头像、档期和介绍。</span>
+            </div>
+          </div>
+          <form id="playerCreateForm" class="form-grid player-create-form">
+            <label>
+              <span>打手ID / 编号</span>
+              <input id="createPlayerId" placeholder="例如 player_001" />
+            </label>
+            <label>
+              <span>昵称</span>
+              <input id="createPlayerName" placeholder="打手展示昵称" />
+            </label>
+            <label>
+              <span>展示标题</span>
+              <input id="createPlayerTitle" placeholder="例如 国服陪玩 / 声优陪练" />
+            </label>
+            <label>
+              <span>游戏</span>
+              <select id="createPlayerGame"></select>
+            </label>
+            <label>
+              <span>机密等级</span>
+              <select id="createPlayerConfidentialLevel"></select>
+            </label>
+            <label>
+              <span>绝密等级</span>
+              <select id="createPlayerTopSecretLevel"></select>
+            </label>
+            <label>
+              <span>首页排序</span>
+              <input id="createPlayerHomeSort" type="number" min="0" placeholder="数字越小越靠前" />
+            </label>
+            <label class="switch-field">
+              <input id="createPlayerShowOnHome" type="checkbox" checked />
+              <span>首页热门达人展示</span>
+            </label>
+            <label>
+              <span>工作台密钥</span>
+              <input id="createPlayerSecret" placeholder="留空自动生成" />
+            </label>
+            <label>
+              <span>收入配置</span>
+              <select id="createPlayerRevenueConfig"></select>
+            </label>
+            <label>
+              <span>订单收入人民币</span>
+              <input id="createPlayerEarnedBalance" type="number" min="0" step="0.01" value="0" />
+            </label>
+            <label>
+              <span>充值人民币</span>
+              <input id="createPlayerRechargeBalance" type="number" min="0" step="0.01" value="0" />
+            </label>
+            <label class="wide">
+              <span>标签，逗号分隔</span>
+              <input id="createPlayerTags" placeholder="例如 在线快,声音好听,高胜率" />
+            </label>
+            <button class="primary-btn" type="submit">保存新增打手</button>
+          </form>
+        </section>
+      </section>
+
+      <section id="ordersView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>订单列表</strong>
+              <span>小程序提交和客服后台处理的订单都会汇总到这里。</span>
+            </div>
+          </div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>订单号</th>
+                  <th>用户</th>
+                  <th>陪玩/游戏</th>
+                  <th>订单原价</th>
+                  <th>平台抽成</th>
+                  <th>打手收入</th>
+                  <th>收入配置</th>
+                  <th>状态</th>
+                  <th>处理人</th>
+                  <th>备注</th>
+                </tr>
+              </thead>
+              <tbody id="adminOrderTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="dispatchView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>派单管理</strong>
+              <span>未分配和待确认订单集中处理。</span>
+            </div>
+          </div>
+          <div id="dispatchList" class="record-list"></div>
+        </section>
+      </section>
+
+      <section id="acceptsView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>接单管理</strong>
+              <span>查看已确认、服务中和待完成订单。</span>
+            </div>
+          </div>
+          <div id="acceptList" class="record-list"></div>
+        </section>
+      </section>
+
+      <section id="helpView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>帮助中心</strong>
+              <span>小程序公告、安全提示和客服标准话术。</span>
+            </div>
+          </div>
+          <div id="helpList" class="record-list"></div>
+        </section>
+      </section>
+
+      <section id="rechargeView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>充值管理</strong>
+              <span>当前以订单实付金额作为充值/收入统计口径。</span>
+            </div>
+          </div>
+          <div id="rechargeStats" class="stats-grid inner-stats"></div>
+          <form id="rechargeTierForm" class="form-grid recharge-tier-form">
+            <label>
+              <span>快捷充值 1（元）</span>
+              <input data-recharge-tier="0" type="number" min="1" step="0.01" />
+            </label>
+            <label>
+              <span>快捷充值 2（元）</span>
+              <input data-recharge-tier="1" type="number" min="1" step="0.01" />
+            </label>
+            <label>
+              <span>快捷充值 3（元）</span>
+              <input data-recharge-tier="2" type="number" min="1" step="0.01" />
+            </label>
+            <label>
+              <span>快捷充值 4（元）</span>
+              <input data-recharge-tier="3" type="number" min="1" step="0.01" />
+            </label>
+            <label>
+              <span>快捷充值 5（元）</span>
+              <input data-recharge-tier="4" type="number" min="1" step="0.01" />
+            </label>
+            <button class="primary-btn" type="submit">保存充值挡位</button>
+          </form>
+          <div id="rechargeOrderList" class="record-list"></div>
+        </section>
+      </section>
+
+      <section id="chatsView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>小程序群聊</strong>
+              <span>总后台只做全局查看和运营管理，具体沟通在客服后台处理。</span>
+            </div>
+            <a class="soft-link" href="./index.html">进入客服后台</a>
+          </div>
+          <div id="adminSessionList" class="record-list"></div>
+        </section>
+      </section>
+
+      <section id="invitesView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>邀请有礼</strong>
+              <span>新用户注册填写老用户 6 位 ID，首月消费按比例给邀请人提成。</span>
+            </div>
+          </div>
+          <div id="inviteStats" class="stats-grid inner-stats"></div>
+          <div id="inviteRuleList" class="record-list"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>邀请关系</strong>
+              <span>小程序提交后会进入这里，后续真实数据直接接同一接口。</span>
+            </div>
+          </div>
+          <div id="referralList" class="record-list"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>提成流水</strong>
+              <span>用户下单扣款后，系统自动给邀请人增加人民币余额。</span>
+            </div>
+          </div>
+          <div id="referralCommissionList" class="record-list"></div>
+        </section>
+      </section>
+
+      <section id="withdrawalsView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>提现管理</strong>
+              <span>打手提交提现后余额已先扣除，总后台在这里手动确认处理结果。</span>
+            </div>
+          </div>
+          <div id="withdrawalStats" class="stats-grid inner-stats"></div>
+          <div class="admin-table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>申请单号</th>
+                  <th>打手</th>
+                  <th>提现金额</th>
+                  <th>状态</th>
+                  <th>申请时间</th>
+                  <th>处理备注</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="withdrawalTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section id="settingsView" class="view hidden">
+        <section class="panel narrow-panel">
+          <div class="panel-head">
+            <div>
+              <strong>平台基础设置</strong>
+              <span>小程序客服群聊和客服网站共同使用。</span>
+            </div>
+          </div>
+          <form id="settingsForm" class="form-grid">
+            <label>
+              <span>店铺名称</span>
+              <input id="shopName" />
+            </label>
+            <label>
+              <span>营业时间</span>
+              <input id="businessHours" />
+            </label>
+            <label class="wide">
+              <span>一键匹配背景图</span>
+              <div class="settings-image-row">
+                <input id="quickMatchBackgroundUrl" placeholder="图片 URL 或上传后自动填入" />
+                <label class="image-drop-zone settings-image-drop" data-settings-image-drop="quickMatchBackgroundUrl">
+                  <input id="quickMatchBackgroundUpload" type="file" accept="image/*" />
+                  <span>拖拽/选择图片</span>
+                </label>
+              </div>
+            </label>
+            <label class="wide">
+              <span>客服微信二维码</span>
+              <div class="settings-image-row">
+                <input id="customerServiceQrUrl" placeholder="图片 URL 或上传后自动填入" />
+                <label class="image-drop-zone settings-image-drop" data-settings-image-drop="customerServiceQrUrl">
+                  <input id="customerServiceQrUpload" type="file" accept="image/*" />
+                  <span>拖拽/选择二维码</span>
+                </label>
+              </div>
+            </label>
+            <label>
+              <span>回复 SLA 分钟</span>
+              <input id="slaMinutes" type="number" min="1" max="120" />
+            </label>
+            <label>
+              <span>邀请功能</span>
+              <select id="referralEnabled">
+                <option value="true">开启</option>
+                <option value="false">关闭</option>
+              </select>
+            </label>
+            <label>
+              <span>审核模式</span>
+              <select id="auditMode">
+                <option value="true">开启：隐藏敏感文案</option>
+                <option value="false">关闭：正常运营文案</option>
+              </select>
+            </label>
+            <label>
+              <span>支付方式</span>
+              <select id="paymentMode">
+                <option value="official_virtual">官方小程序虚拟支付</option>
+                <option value="service_account_wechat">服务号链接支付</option>
+              </select>
+            </label>
+            <label>
+              <span>虚拟支付 OfferId</span>
+              <input id="virtualPaymentOfferId" placeholder="微信虚拟支付开通后填写" />
+            </label>
+            <label>
+              <span>虚拟支付 AppKey</span>
+              <input id="virtualPaymentAppKey" placeholder="现网 AppKey，只保存在服务器" />
+            </label>
+            <label>
+              <span>虚拟支付模式</span>
+              <select id="virtualPaymentMode">
+                <option value="short_series_coin">代币充值</option>
+                <option value="short_series_goods">道具直购</option>
+              </select>
+            </label>
+            <label>
+              <span>虚拟支付环境</span>
+              <select id="virtualPaymentEnv">
+                <option value="release">正式</option>
+                <option value="sandbox">沙箱</option>
+              </select>
+            </label>
+            <label>
+              <span>虚拟支付币种</span>
+              <input id="virtualPaymentCurrencyType" placeholder="CNY" />
+            </label>
+            <label>
+              <span>虚拟支付平台</span>
+              <select id="virtualPaymentPlatform">
+                <option value="android">Android</option>
+                <option value="ios">iOS</option>
+                <option value="web">Web</option>
+              </select>
+            </label>
+            <label>
+              <span>邀请提成比例 %</span>
+              <input id="referralCommissionRate" type="number" min="0" max="100" step="0.1" />
+            </label>
+            <label>
+              <span>提成有效月份</span>
+              <input id="referralCommissionMonths" type="number" min="1" max="12" />
+            </label>
+            <label class="wide">
+              <span>进群欢迎语</span>
+              <textarea id="autoGreeting"></textarea>
+            </label>
+            <label class="wide">
+              <span>离线提示</span>
+              <textarea id="offlineMessage"></textarea>
+            </label>
+            <div class="wide settings-block">
+              <div class="settings-block-head">
+                <strong>礼物墙价格</strong>
+                <span>单位：人民币，小程序礼物墙会自动读取这里的价格。</span>
+              </div>
+              <div id="giftPriceList" class="gift-price-list"></div>
+            </div>
+            <button class="primary-btn" type="submit">保存设置</button>
+          </form>
+        </section>
+      </section>
+
+      <section id="systemView" class="view hidden">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <strong>系统管理</strong>
+              <span>三端接口状态、数据同步状态和最高权限信息。</span>
+            </div>
+          </div>
+          <div id="systemList" class="record-list"></div>
+        </section>
+      </section>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="./admin.js"></script>
+  </body>
+</html>

@@ -1,0 +1,245 @@
+/* pages/mine/mine.wxss */
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mine {
+  flex: 1;
+  min-height: 0;
+}
+
+.profile-card {
+  position: relative;
+  min-height: 276rpx;
+  margin: 28rpx 24rpx 0;
+  padding: 34rpx 30rpx 30rpx;
+  overflow: hidden;
+  border-radius: 28rpx;
+  background:
+    radial-gradient(circle at 88% 8%, rgba(132, 102, 255, .16), transparent 32%),
+    linear-gradient(135deg, #fff 0%, #fdfbff 48%, #f7f3ff 100%);
+  box-shadow: 0 18rpx 42rpx rgba(112, 93, 180, .12);
+  box-sizing: border-box;
+}
+
+.profile-info {
+  display: grid;
+  grid-template-columns: 90rpx minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18rpx;
+}
+
+.profile-avatar {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 20rpx;
+  background: #f0ebff;
+}
+
+.name {
+  color: #171331;
+  font-size: 34rpx;
+  font-weight: 900;
+}
+
+.id {
+  margin-top: 8rpx;
+  color: #5d5872;
+  font-size: 23rpx;
+}
+
+.level {
+  height: 54rpx;
+  padding: 0 22rpx;
+  color: #7b5615;
+  font-size: 23rpx;
+  font-weight: 900;
+  line-height: 54rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #fff0b8, #ffe090);
+}
+
+.content {
+  padding: 0 24rpx 24rpx;
+}
+
+.member-card {
+  position: relative;
+  z-index: 2;
+  min-height: 108rpx;
+  margin-top: 36rpx;
+  padding: 20rpx 24rpx;
+  display: grid;
+  grid-template-columns: 62rpx minmax(0, 1fr) auto;
+  gap: 16rpx;
+  align-items: center;
+  border-radius: 12rpx;
+  overflow: hidden;
+  background: linear-gradient(135deg, #171717, #2b2928);
+  box-shadow: 0 16rpx 32rpx rgba(24, 20, 17, .16);
+}
+
+.member-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(90deg, rgba(20, 15, 22, .62), rgba(20, 15, 22, .2));
+}
+
+.member-crown {
+  position: relative;
+  z-index: 1;
+  width: 62rpx;
+  height: 62rpx;
+  color: #ffe680;
+  font-size: 48rpx;
+  line-height: 62rpx;
+  text-align: center;
+}
+
+.member-card > view {
+  position: relative;
+  z-index: 1;
+}
+
+.member-card text {
+  display: block;
+}
+
+.member-card text:first-child {
+  color: #fff7d6;
+  font-size: 30rpx;
+  font-weight: 900;
+}
+
+.member-card text:last-child {
+  margin-top: 8rpx;
+  color: rgba(255, 247, 214, .78);
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.member-card > view:last-child {
+  height: 48rpx;
+  padding: 0 18rpx;
+  color: #5a3b0c;
+  font-size: 21rpx;
+  font-weight: 900;
+  line-height: 48rpx;
+  border-radius: 999rpx;
+  background: #fff4c9;
+}
+
+.wallet-card {
+  min-height: 142rpx;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14rpx;
+  margin-top: 18rpx;
+  padding: 18rpx;
+  position: relative;
+  z-index: 2;
+  border-radius: 26rpx;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 121, 211, .22), transparent 28%),
+    radial-gradient(circle at 88% 18%, rgba(119, 101, 255, .18), transparent 32%),
+    linear-gradient(135deg, #fff 0%, #fbf7ff 48%, #f4efff 100%);
+  box-shadow: 0 18rpx 42rpx rgba(102, 80, 190, .14);
+  box-sizing: border-box;
+}
+
+.wallet-item {
+  min-width: 0;
+  padding: 10rpx 14rpx;
+  border-radius: 20rpx;
+  background: rgba(255, 255, 255, .72);
+  box-sizing: border-box;
+}
+
+.wallet-head {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  color: #756d86;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.wallet-head image,
+.wallet-icon-text {
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 10rpx;
+  flex: 0 0 auto;
+}
+
+.wallet-icon-text {
+  color: #fff;
+  font-size: 20rpx;
+  font-weight: 900;
+  line-height: 34rpx;
+  text-align: center;
+  background: linear-gradient(135deg, #78c9ff, #7b61ff);
+}
+
+.wallet-arrow {
+  margin-left: auto;
+  color: #b3adc2;
+  font-size: 34rpx;
+  line-height: 1;
+}
+
+.wallet-value {
+  margin-top: 14rpx;
+  color: #171331;
+  font-size: 34rpx;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.section-title {
+  margin: 32rpx 0 18rpx;
+  color: #1b1737;
+  font-size: 28rpx;
+  font-weight: 900;
+}
+
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 6rpx;
+  padding: 20rpx 12rpx;
+}
+
+.tool {
+  min-height: 130rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+}
+
+.tool-icon {
+  width: 58rpx;
+  height: 58rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6851de;
+  font-size: 30rpx;
+  font-weight: 900;
+  border-radius: 18rpx;
+  background: #f0ebff;
+}
+
+.tool text {
+  color: #2b2549;
+  font-size: 22rpx;
+  font-weight: 800;
+  white-space: nowrap;
+}

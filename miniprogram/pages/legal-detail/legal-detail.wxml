@@ -1,0 +1,12 @@
+<navigation-bar title="{{title}}" background="transparent"></navigation-bar>
+
+<scroll-view class="page legal-page safe-bottom" scroll-y>
+  <view class="legal-card">
+    <view class="legal-title">{{title}}</view>
+    <text
+      class="legal-line"
+      wx:for="{{paragraphs}}"
+      wx:key="*this"
+    >{{item}}</text>
+  </view>
+</scroll-view>

@@ -1,0 +1,146 @@
+<navigation-bar title="商品详情" background="#f7f4ff" color="#191633"></navigation-bar>
+
+<scroll-view class="page confirm-page safe-bottom" scroll-y enable-flex>
+  <view class="content">
+    <view class="confirm-card product-card">
+      <view class="card-title">商品信息</view>
+      <view class="product-main">
+        <image src="{{order.imageUrl}}" mode="aspectFill"></image>
+        <view>
+          <text>{{order.title}}</text>
+          <text>{{order.selectedPriceTier.name}}</text>
+        </view>
+        <view class="product-price">
+          <text>{{order.priceText}}</text>
+          <text>x{{quantity}}</text>
+        </view>
+      </view>
+
+      <view class="spec-row" bindtap="openSpecTip">
+        <text>规格</text>
+        <view>
+          <text>{{order.selectedPriceTier.name}}</text>
+          <text>{{specSwitchText}}</text>
+        </view>
+      </view>
+      <view class="tier-list" wx:if="{{showTierList}}">
+        <view
+          class="tier-item {{item.cls}}"
+          wx:for="{{order.priceTiers}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="chooseTier"
+        >
+          <text>{{item.name}}</text>
+          <text>{{item.priceText}} 猫粮</text>
+        </view>
+      </view>
+
+      <view class="amount-row">
+        <text>商品金额</text>
+        <text>{{totalAmount}} 猫粮</text>
+      </view>
+      <view class="amount-row">
+        <text>优惠券</text>
+        <text>暂无可用券 ›</text>
+      </view>
+      <view class="pay-row">
+        <text>实付金额</text>
+        <text>{{totalAmount}} 猫粮</text>
+      </view>
+    </view>
+
+    <view class="confirm-card form-card">
+      <view class="card-title">下单信息</view>
+      <view class="input-row">
+        <text>游戏昵称</text>
+        <input
+          value="{{gameNickname}}"
+          placeholder="请输入游戏昵称"
+          placeholder-class="input-placeholder"
+          bindinput="onGameNicknameInput"
+        />
+      </view>
+      <view class="input-row">
+        <text>ID编号</text>
+        <input
+          value="{{gameId}}"
+          placeholder="请输入ID编号"
+          placeholder-class="input-placeholder"
+          bindinput="onGameIdInput"
+        />
+      </view>
+      <view class="assign-row">
+        <text>接单陪练</text>
+        <view>
+          <view class="radio-item {{assignMode === 'random' ? 'active' : ''}}" data-mode="random" bindtap="chooseAssignMode">
+            <text></text>
+            <text>随机安排</text>
+          </view>
+          <view class="radio-item {{assignMode === 'appoint' ? 'active' : ''}}" data-mode="appoint" bindtap="chooseAssignMode">
+            <text></text>
+            <text>{{selectedPlayer ? selectedPlayer.name : '指定陪练'}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="quantity-row">
+        <text>下单数量</text>
+        <view class="stepper">
+          <button class="{{quantity <= 1 ? 'disabled' : ''}}" data-step="-1" bindtap="changeQuantity">-</button>
+          <text>{{quantity}}</text>
+          <button data-step="1" bindtap="changeQuantity">+</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="bottom-submit safe-bottom">
+  <view class="agreement" bindtap="toggleAgreement">
+    <text class="{{agreed ? 'checked' : ''}}"></text>
+    <text>我已阅读并同意</text>
+    <text catchtap="showAgreement">《下单协议》</text>
+  </view>
+  <view class="submit-line">
+    <view>
+      <text>合计</text>
+      <text>{{totalAmount}} 猫粮</text>
+    </view>
+    <button bindtap="submitOrder">确认付款</button>
+  </view>
+</view>
+
+<view class="picker-mask" wx:if="{{showPlayerPicker}}">
+  <view class="player-picker">
+    <view class="picker-head">
+      <text>选择陪练</text>
+      <text bindtap="closePlayerPicker">×</text>
+    </view>
+    <view class="picker-search">
+      <text>⌕</text>
+      <input
+        value="{{playerKeyword}}"
+        placeholder="搜索陪练名字或ID"
+        placeholder-class="input-placeholder"
+        bindinput="onPlayerSearchInput"
+      />
+    </view>
+    <scroll-view class="picker-list" scroll-y>
+      <view
+        class="picker-player {{item.selected ? 'active' : ''}}"
+        wx:for="{{playerOptions}}"
+        wx:key="id"
+        data-player-id="{{item.id}}"
+        bindtap="selectPlayer"
+      >
+        <view class="picker-radio"></view>
+        <image src="{{item.avatar}}" mode="aspectFill"></image>
+        <view>
+          <text>{{item.name}}</text>
+          <text>ID {{item.id}} · {{item.level}} · {{item.gender}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    <button class="picker-confirm" bindtap="confirmPlayerPicker">确定</button>
+  </view>
+</view>

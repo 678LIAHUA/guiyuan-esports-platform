@@ -1,0 +1,64 @@
+<navigation-bar title="订单详情" background="transparent"></navigation-bar>
+
+<scroll-view class="page order-detail safe-bottom" scroll-y enable-flex>
+  <view class="content">
+    <view class="hero-card">
+      <image
+        class="hero-img"
+        src="{{order.detailImageUrl}}"
+        mode="widthFix"
+        style="width: {{order.detailImageWidth}};"
+      ></image>
+      <view class="hero-tag">{{order.tag}}</view>
+    </view>
+
+    <view class="title-card">
+      <text class="order-title">{{order.title}}</text>
+      <view class="price-line">
+        <text>{{order.priceText}}</text>
+        <text>猫粮</text>
+        <text wx:if="{{order.orderCount}}">销量 {{order.orderCount}}</text>
+      </view>
+      <text class="order-note">{{order.note}}</text>
+    </view>
+
+    <view class="tier-card" wx:if="{{order.priceTiers.length}}">
+      <view class="desc-title">规格</view>
+      <view class="tier-grid">
+        <view
+          class="tier-item {{item.cls}}"
+          wx:for="{{order.priceTiers}}"
+          wx:key="id"
+          data-id="{{item.id}}"
+          bindtap="chooseTier"
+        >
+          <view>
+            <text>{{item.name}}</text>
+            <text wx:if="{{item.desc}}">{{item.desc}}</text>
+          </view>
+          <view>
+            <text>{{item.priceText}}</text>
+            <text>猫粮</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="tag-card card">
+      <text wx:for="{{order.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+
+    <view class="desc-card card">
+      <view class="desc-title">订单说明</view>
+      <view class="desc-text">{{order.detailDesc}}</view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="detail-bottom safe-bottom">
+  <view class="service-btn" bindtap="contactService">
+    <text>客</text>
+    <text>客服</text>
+  </view>
+  <button bindtap="openRoom">{{order.actionText}}</button>
+</view>

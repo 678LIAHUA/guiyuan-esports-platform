@@ -1,0 +1,50 @@
+﻿<navigation-bar title="我的" back="{{false}}" background="transparent"></navigation-bar>
+
+<scroll-view class="page mine safe-bottom" scroll-y enable-flex type="list">
+  <view class="profile-card">
+    <view class="profile-info">
+      <image class="profile-avatar" src="{{customer.avatar || '/assets/avatar-yinyue.jpg'}}" mode="aspectFill"></image>
+      <view>
+        <view class="name">{{customer.name || '喵喵喵'}}</view>
+        <view class="id">ID: {{customer.id || '000000'}}</view>
+      </view>
+      <view class="level">{{customer.memberLevelName || '会员'}}</view>
+    </view>
+    <view class="member-card" bindtap="openMemberCard">
+      <view class="member-crown">♛</view>
+      <view>
+        <text>{{customer.memberLevelName || '会员卡'}}</text>
+        <text>ID {{customer.id || '000000'}} · 成长值 {{customer.spentCatFood || 0}}</text>
+      </view>
+      <view>会员卡</view>
+    </view>
+  </view>
+
+  <view class="content">
+    <view class="wallet-card">
+      <view
+        class="wallet-item"
+        wx:for="{{walletItems}}"
+        wx:key="key"
+        data-url="{{item.url}}"
+        bindtap="openWallet"
+      >
+        <view class="wallet-head">
+          <image wx:if="{{item.icon}}" src="{{item.icon}}" mode="aspectFill"></image>
+          <view wx:else class="wallet-icon-text">{{item.iconText}}</view>
+          <text>{{item.label}}</text>
+          <text class="wallet-arrow">›</text>
+        </view>
+        <view class="wallet-value">{{item.value}}</view>
+      </view>
+    </view>
+
+    <view class="section-title">常用功能</view>
+    <view class="tool-grid card">
+      <view class="tool" wx:for="{{tools}}" wx:key="name" data-url="{{item.url}}" data-name="{{item.name}}" bindtap="openTool">
+        <view class="tool-icon">{{item.icon}}</view>
+        <text>{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>

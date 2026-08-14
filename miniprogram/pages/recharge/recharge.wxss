@@ -1,0 +1,289 @@
+page {
+  min-height: 100vh;
+  background: #fbf6fb;
+}
+
+.recharge {
+  height: calc(100vh - 136rpx);
+  box-sizing: border-box;
+  padding-bottom: 160rpx;
+}
+
+.recharge-hero {
+  position: relative;
+  min-height: 398rpx;
+  padding: 74rpx 30rpx 34rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-align: center;
+  background: linear-gradient(180deg, #fbf6fb 0%, #f8eff8 100%);
+}
+
+.record-link {
+  position: absolute;
+  top: 42rpx;
+  right: 28rpx;
+  height: 58rpx;
+  margin: 0;
+  padding: 0;
+  color: #d88af0;
+  font-size: 28rpx;
+  line-height: 58rpx;
+  background: transparent;
+}
+
+.record-link::after {
+  border: 0;
+}
+
+.balance-label {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  margin-top: 74rpx;
+  color: #9f9aa4;
+  font-size: 28rpx;
+}
+
+.help-dot {
+  width: 34rpx;
+  height: 34rpx;
+  border: 3rpx solid #aaa4ad;
+  border-radius: 50%;
+  color: #aaa4ad;
+  font-size: 23rpx;
+  font-weight: 800;
+  line-height: 30rpx;
+}
+
+.balance-value {
+  position: relative;
+  z-index: 1;
+  margin-top: 24rpx;
+  color: #24242b;
+  font-size: 72rpx;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.hero-gem {
+  position: absolute;
+  right: 42rpx;
+  top: 120rpx;
+  width: 270rpx;
+  height: 190rpx;
+  opacity: .22;
+  background:
+    linear-gradient(135deg, transparent 42%, rgba(255,255,255,.75) 43% 58%, transparent 59%),
+    linear-gradient(35deg, transparent 38%, rgba(255,255,255,.86) 39% 62%, transparent 63%);
+  transform: skewX(-18deg);
+}
+
+.recharge-panel {
+  position: relative;
+  z-index: 2;
+  margin-top: -24rpx;
+  padding: 38rpx 28rpx 44rpx;
+  border-radius: 34rpx 34rpx 0 0;
+  background: #fff;
+}
+
+.section-title {
+  margin-bottom: 24rpx;
+  color: #6b6870;
+  font-size: 28rpx;
+}
+
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20rpx 26rpx;
+}
+
+.tier-card {
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 0 22rpx;
+  border: 3rpx solid #ecebed;
+  border-radius: 10rpx;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.tier-card.active {
+  border-color: #d681ef;
+  background: #fbf1ff;
+  box-shadow: 0 0 0 1rpx rgba(216, 129, 239, .16);
+}
+
+.token-side {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+}
+
+.token-side image,
+.custom-token image {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 8rpx;
+}
+
+.token-side text {
+  color: #28282f;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.yuan {
+  color: #9c9aa0;
+  font-size: 28rpx;
+  white-space: nowrap;
+}
+
+.custom-amount {
+  height: 88rpx;
+  display: flex;
+  align-items: center;
+  margin-top: 26rpx;
+  padding: 0 24rpx;
+  border: 3rpx solid #ecebed;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+}
+
+.custom-amount input {
+  flex: 1;
+  min-width: 0;
+  color: #26262d;
+  font-size: 34rpx;
+}
+
+.custom-amount input::placeholder {
+  color: #b7b4bb;
+}
+
+.custom-token {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  color: #6e55e8;
+  font-size: 28rpx;
+}
+
+.pay-title {
+  margin-top: 32rpx;
+}
+
+.pay-method {
+  height: 112rpx;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  border-bottom: 1rpx solid #eeeeef;
+}
+
+.wechat-icon {
+  width: 54rpx;
+  height: 54rpx;
+  border-radius: 50%;
+  background: #23d236;
+  color: #fff;
+  font-size: 38rpx;
+  font-weight: 900;
+  line-height: 54rpx;
+  text-align: center;
+}
+
+.pay-method text {
+  flex: 1;
+  color: #2b2a31;
+  font-size: 30rpx;
+}
+
+.check-box {
+  width: 42rpx;
+  height: 42rpx;
+  border-radius: 10rpx;
+  background: #0b0b0d;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 900;
+  line-height: 42rpx;
+  text-align: center;
+}
+
+.pending-recharge {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  margin-top: 22rpx;
+  padding: 22rpx 24rpx;
+  border-radius: 18rpx;
+  background: #fbf1ff;
+  border: 2rpx solid rgba(216, 129, 239, .22);
+}
+
+.pending-recharge > view {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.pending-recharge text:first-child {
+  color: #2b2a31;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.pending-recharge text:last-child {
+  color: #8f8796;
+  font-size: 24rpx;
+}
+
+.pending-recharge button {
+  width: 128rpx;
+  height: 58rpx;
+  margin: 0;
+  padding: 0;
+  border-radius: 999rpx;
+  background: #fff;
+  color: #d681ef;
+  font-size: 24rpx;
+  line-height: 58rpx;
+}
+
+.pending-recharge button::after {
+  border: 0;
+}
+
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 18rpx 28rpx 30rpx;
+  background: rgba(255, 255, 255, .98);
+  box-sizing: border-box;
+}
+
+.bottom-bar button {
+  width: 100%;
+  height: 96rpx;
+  margin: 0;
+  border-radius: 999rpx;
+  background: #303030;
+  color: #fff;
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 96rpx;
+}

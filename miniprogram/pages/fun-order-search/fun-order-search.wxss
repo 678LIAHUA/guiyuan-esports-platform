@@ -1,0 +1,125 @@
+page {
+  min-height: 100vh;
+}
+
+.content {
+  padding: 0 24rpx 36rpx;
+}
+
+.search-head {
+  padding: 24rpx 26rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+  border-radius: 30rpx;
+  background: rgba(255, 255, 255, .82);
+  border: 1rpx solid rgba(119, 91, 232, .12);
+  box-shadow: 0 14rpx 34rpx rgba(87, 69, 168, .1);
+}
+
+.search-head text:first-child {
+  color: #171331;
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.search-head text:last-child {
+  color: #756d94;
+  font-size: 22rpx;
+  line-height: 32rpx;
+}
+
+.fun-order-card {
+  margin-top: 18rpx;
+  padding: 20rpx;
+  border-radius: 30rpx;
+  background: rgba(255, 255, 255, .88);
+  border: 1rpx solid rgba(119, 91, 232, .12);
+  box-shadow: 0 14rpx 30rpx rgba(87, 69, 168, .08);
+}
+
+.fun-order-card.matched {
+  border-color: rgba(116, 88, 221, .32);
+  background: linear-gradient(180deg, #ffffff, #f3efff);
+}
+
+.order-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 118rpx;
+  align-items: start;
+  gap: 14rpx;
+}
+
+.order-top > view {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.order-top > view text:first-child {
+  color: #171331;
+  font-size: 29rpx;
+  font-weight: 900;
+  line-height: 38rpx;
+}
+
+.order-top > view text:last-child {
+  color: #756d94;
+  font-size: 22rpx;
+  line-height: 32rpx;
+}
+
+.order-top > text {
+  height: 44rpx;
+  color: #7357ee;
+  font-size: 20rpx;
+  font-weight: 900;
+  line-height: 44rpx;
+  text-align: center;
+  border-radius: 999rpx;
+  background: #eee9ff;
+}
+
+.fun-order-card.hot .order-top > text {
+  color: #8a6a16;
+  background: #fff2c8;
+}
+
+.tag-row {
+  margin-top: 16rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10rpx;
+}
+
+.tag-row text {
+  height: 36rpx;
+  padding: 0 13rpx;
+  color: #7357ee;
+  font-size: 20rpx;
+  font-weight: 900;
+  line-height: 36rpx;
+  border-radius: 999rpx;
+  background: #eee9ff;
+}
+
+.order-bottom {
+  margin-top: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18rpx;
+}
+
+.order-bottom text:first-child {
+  color: #171331;
+  font-size: 32rpx;
+  font-weight: 900;
+}
+
+.order-bottom text:last-child {
+  color: #756d94;
+  font-size: 22rpx;
+  font-weight: 800;
+}

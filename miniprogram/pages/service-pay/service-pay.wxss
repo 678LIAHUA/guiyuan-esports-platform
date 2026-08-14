@@ -1,0 +1,261 @@
+page {
+  min-height: 100vh;
+  background: #f7f7f7;
+}
+
+.pay-page {
+  height: calc(100vh - 150rpx);
+  box-sizing: border-box;
+  padding-bottom: 170rpx;
+}
+
+.pay-content {
+  padding: 22rpx 28rpx 170rpx;
+}
+
+.expire-card,
+.order-card,
+.method-card {
+  border-radius: 22rpx;
+  background: #fff;
+}
+
+.expire-card {
+  height: 108rpx;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  padding: 0 32rpx;
+  color: #1d1b21;
+  font-size: 34rpx;
+  box-sizing: border-box;
+}
+
+.clock-icon,
+.pink {
+  color: #f5285c;
+}
+
+.clock-icon {
+  font-size: 34rpx;
+}
+
+.order-card {
+  margin-top: 26rpx;
+  overflow: hidden;
+}
+
+.order-no {
+  padding: 34rpx 32rpx 10rpx;
+  color: #8f8d95;
+  font-size: 29rpx;
+}
+
+.goods-row {
+  display: grid;
+  grid-template-columns: 150rpx minmax(0, 1fr) 44rpx;
+  gap: 24rpx;
+  padding: 34rpx 32rpx;
+  align-items: center;
+}
+
+.goods-cover {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 10rpx;
+  background: #eee9ff;
+}
+
+.goods-info {
+  min-width: 0;
+}
+
+.goods-title {
+  color: #17151d;
+  font-size: 31rpx;
+  font-weight: 800;
+  line-height: 42rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.goods-spec {
+  margin-top: 16rpx;
+  color: #8f8d95;
+  font-size: 28rpx;
+}
+
+.goods-price {
+  margin-top: 24rpx;
+  color: #f5285c;
+  font-size: 38rpx;
+}
+
+.goods-count {
+  align-self: end;
+  color: #8f8d95;
+  font-size: 27rpx;
+}
+
+.total-row {
+  height: 96rpx;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10rpx;
+  padding: 0 32rpx;
+  border-top: 1rpx solid #eeeeef;
+  font-size: 32rpx;
+}
+
+.total-row text:last-child {
+  color: #f5285c;
+  font-weight: 800;
+}
+
+.method-card {
+  margin-top: 28rpx;
+  overflow: hidden;
+}
+
+.pay-tip-card {
+  margin-top: 24rpx;
+  padding: 24rpx 28rpx;
+  border-radius: 22rpx;
+  color: #696570;
+  font-size: 27rpx;
+  line-height: 1.6;
+  background: #fff;
+}
+
+.pay-url-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16rpx;
+  margin-top: 18rpx;
+}
+
+.pay-url-actions button {
+  height: 66rpx;
+  margin: 0;
+  border-radius: 12rpx;
+  color: #f5285c;
+  font-size: 26rpx;
+  line-height: 66rpx;
+  background: #fff3f7;
+}
+
+.pay-url-actions button::after {
+  border: 0;
+}
+
+.method-title {
+  padding: 28rpx 32rpx 18rpx;
+  color: #7f7c85;
+  font-size: 32rpx;
+}
+
+.method-row {
+  height: 112rpx;
+  display: flex;
+  align-items: center;
+  gap: 22rpx;
+  padding: 0 32rpx;
+  border-top: 1rpx solid #f0eff2;
+  color: #201f26;
+  font-size: 31rpx;
+}
+
+.coupon-icon {
+  width: 38rpx;
+  height: 30rpx;
+  border-radius: 8rpx;
+  background: #ffb24e;
+}
+
+.coupon-empty {
+  margin-left: auto;
+  color: #f0526f;
+  font-size: 29rpx;
+}
+
+.arrow {
+  color: #9c99a2;
+  font-size: 48rpx;
+  line-height: 1;
+}
+
+.wechat-icon {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 24rpx;
+  font-weight: 900;
+  line-height: 48rpx;
+  text-align: center;
+  background: #16c941;
+}
+
+.checked {
+  width: 46rpx;
+  height: 46rpx;
+  margin-left: auto;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 900;
+  line-height: 46rpx;
+  text-align: center;
+  background: #ff2358;
+}
+
+.pay-bottom {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 132rpx;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 246rpx;
+  background: #fff;
+  box-shadow: 0 -10rpx 26rpx rgba(0, 0, 0, .04);
+}
+
+.pay-total {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 6rpx;
+  padding-right: 28rpx;
+  color: #242229;
+  font-size: 31rpx;
+  font-weight: 700;
+}
+
+.pay-total > text:first-child text {
+  color: #f5285c;
+  font-size: 38rpx;
+}
+
+.pay-total > text:last-child {
+  color: #f5285c;
+}
+
+.pay-bottom button {
+  width: 100%;
+  height: 132rpx;
+  margin: 0;
+  border-radius: 0;
+  color: #fff;
+  font-size: 38rpx;
+  font-weight: 800;
+  line-height: 132rpx;
+  background: #ff2358;
+}
+
+.pay-bottom button::after {
+  border: 0;
+}

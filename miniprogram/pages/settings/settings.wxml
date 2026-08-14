@@ -1,0 +1,43 @@
+<navigation-bar title="设置" background="#f7f8fb"></navigation-bar>
+
+<view class="page settings-page">
+  <view class="profile-editor">
+    <view class="profile-row">
+      <button class="avatar-picker" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image src="{{profile.avatar || '/assets/avatar-yinyue.jpg'}}" mode="aspectFill"></image>
+        <text>更换头像</text>
+      </button>
+      <view class="nickname-box">
+        <text>昵称</text>
+        <input
+          type="nickname"
+          value="{{nicknameInput}}"
+          placeholder="请输入昵称"
+          placeholder-class="placeholder"
+          bindinput="onNicknameInput"
+        />
+      </view>
+    </view>
+    <button class="save-profile" bindtap="saveProfile">保存资料</button>
+  </view>
+
+  <view class="settings-group" wx:for="{{groups}}" wx:key="*this">
+    <view
+      class="settings-row"
+      wx:for="{{item}}"
+      wx:for-item="row"
+      wx:key="id"
+      data-id="{{row.id}}"
+      bindtap="handleSetting"
+    >
+      <text class="row-name">{{row.name}}</text>
+      <view class="row-right">
+        <text wx:if="{{row.id === 'cache'}}">{{cacheSize}}</text>
+        <text wx:elif="{{row.value}}">{{row.value}}</text>
+        <text class="arrow" wx:if="{{row.arrow}}">›</text>
+      </view>
+    </view>
+  </view>
+
+  <button class="logout-btn" bindtap="logout">退出账号</button>
+</view>

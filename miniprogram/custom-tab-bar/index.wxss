@@ -1,0 +1,121 @@
+:host {
+  pointer-events: none;
+}
+
+.tab-shell {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  padding: 0 18rpx calc(10rpx + env(safe-area-inset-bottom));
+  pointer-events: none;
+}
+
+.tab-shell.is-hidden {
+  display: none;
+}
+
+.tab-bar {
+  width: 100%;
+  max-width: 714rpx;
+  height: 126rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: 12rpx;
+  overflow: hidden;
+  border-radius: 999rpx;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .98), rgba(250, 247, 255, .96));
+  border: 2rpx solid rgba(132, 103, 238, .14);
+  box-shadow:
+    0 -8rpx 26rpx rgba(78, 57, 154, .09),
+    0 14rpx 34rpx rgba(118, 93, 225, .12),
+    inset 0 3rpx 0 rgba(255, 255, 255, .95);
+  pointer-events: auto;
+}
+
+.tab-item {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #766f93;
+  font-size: 21rpx;
+  font-weight: 800;
+  border-radius: 999rpx;
+  background: transparent;
+}
+
+.tab-item.active {
+  color: #6345df;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, .86), transparent 36%),
+    linear-gradient(180deg, #f1ecff, #ffffff);
+  box-shadow:
+    inset 0 2rpx 0 rgba(255, 255, 255, .9),
+    inset 0 -6rpx 14rpx rgba(122, 94, 229, .08),
+    0 8rpx 18rpx rgba(99, 69, 223, .12);
+}
+
+.icon-wrap {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6rpx;
+  border-radius: 18rpx;
+}
+
+.tab-icon-img {
+  width: 42rpx;
+  height: 42rpx;
+  display: block;
+}
+
+.tab-text {
+  max-width: 100%;
+  line-height: 27rpx;
+  white-space: nowrap;
+}
+
+.tab-item.active .tab-icon-img {
+  filter: drop-shadow(0 4rpx 5rpx rgba(93, 64, 205, .12));
+}
+
+@media (max-width: 340px) {
+  .tab-shell {
+    padding-left: 12rpx;
+    padding-right: 12rpx;
+  }
+
+  .tab-bar {
+    height: 118rpx;
+    gap: 6rpx;
+    padding: 10rpx;
+    border-radius: 999rpx;
+  }
+
+  .tab-item {
+    font-size: 20rpx;
+    border-radius: 999rpx;
+  }
+
+  .icon-wrap {
+    width: 44rpx;
+    height: 44rpx;
+    margin-bottom: 4rpx;
+  }
+
+  .tab-icon-img {
+    width: 38rpx;
+    height: 38rpx;
+  }
+}

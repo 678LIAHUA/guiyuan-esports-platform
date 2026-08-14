@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "全部达人",
+  "usingComponents": {
+    "navigation-bar": "/components/navigation-bar/navigation-bar"
+  }
+}

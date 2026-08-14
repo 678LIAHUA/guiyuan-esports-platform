@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>桂圆电竞总后台预览</title>
+    <link rel="stylesheet" href="./boss-preview.css" />
+  </head>
+  <body>
+    <div class="admin-app">
+      <aside class="module-rail">
+        <div class="logo-badge">
+          <img src="./assets/guiyuan-logo.jpg" alt="桂圆电竞" />
+        </div>
+        <nav id="moduleRail" class="module-nav"></nav>
+        <button class="collapse-btn" data-collapse-nav>↔</button>
+      </aside>
+
+      <aside class="sub-rail">
+        <div class="sub-title">
+          <i></i>
+          <strong id="moduleTitle">统计</strong>
+        </div>
+        <nav id="subNav" class="sub-nav"></nav>
+      </aside>
+
+      <section class="page-shell">
+        <header class="topbar">
+          <div class="breadcrumb">
+            <button class="refresh-dot" data-action="刷新">⟳</button>
+            <span id="breadcrumbText">统计 / 综合面板</span>
+          </div>
+          <div class="top-tools">
+            <label class="search-box">
+              <span>⌕</span>
+              <input placeholder="搜索" />
+              <kbd>Ctrl K</kbd>
+            </label>
+            <button class="tool-btn" data-action="全屏">⛶</button>
+            <button class="tool-btn notice-dot" data-action="消息通知">♟</button>
+            <button class="tool-btn" data-action="主题配置">⚙</button>
+            <button class="tool-btn" data-action="深色模式">☾</button>
+            <button class="user-avatar" data-action="账号菜单"></button>
+          </div>
+        </header>
+
+        <div id="tabBar" class="tab-bar"></div>
+        <main id="content" class="content"></main>
+      </section>
+    </div>
+
+    <div id="drawerMask" class="drawer-mask hidden"></div>
+    <aside id="drawer" class="drawer hidden">
+      <header>
+        <div>
+          <span id="drawerType">详情</span>
+          <strong id="drawerTitle">记录详情</strong>
+        </div>
+        <button id="closeDrawer">×</button>
+      </header>
+      <div id="drawerBody" class="drawer-body"></div>
+    </aside>
+
+    <div id="toast" class="toast hidden">已保存</div>
+    <div id="modalMask" class="modal-mask hidden"></div>
+    <section id="modal" class="modal hidden">
+      <header class="modal-head">
+        <div>
+          <span id="modalSub">操作</span>
+          <strong id="modalTitle">新增记录</strong>
+        </div>
+        <button id="closeModal">×</button>
+      </header>
+      <div id="modalBody" class="modal-body"></div>
+      <footer class="modal-foot">
+        <button id="cancelModal" class="outline-btn">取消</button>
+        <button id="confirmModal" class="primary-btn">确认</button>
+      </footer>
+    </section>
+    <script src="./boss-preview.js"></script>
+  </body>
+</html>

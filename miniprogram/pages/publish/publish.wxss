@@ -1,0 +1,43 @@
+page {
+  min-height: 100vh;
+  background: #f7f5ff;
+}
+
+.publish-placeholder {
+  min-height: 100vh;
+  padding: 190rpx 32rpx 48rpx;
+  box-sizing: border-box;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(151, 123, 255, .2), transparent 420rpx),
+    #f7f5ff;
+}
+
+.placeholder-card {
+  padding: 40rpx 34rpx;
+  border-radius: 28rpx;
+  background: #ffffff;
+  box-shadow: 0 18rpx 46rpx rgba(83, 63, 158, .12);
+}
+
+.placeholder-title {
+  color: #2f2850;
+  font-size: 34rpx;
+  font-weight: 800;
+}
+
+.placeholder-desc {
+  margin-top: 14rpx;
+  color: #8b82aa;
+  font-size: 25rpx;
+  line-height: 1.7;
+}
+
+.placeholder-card button {
+  height: 84rpx;
+  margin-top: 30rpx;
+  border-radius: 999rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+  font-weight: 700;
+  background: linear-gradient(135deg, #8f74ff, #ff8ac4);
+}

@@ -1,0 +1,32 @@
+<navigation-bar title="登录" background="transparent"></navigation-bar>
+
+<view class="page login-page safe-bottom">
+  <view class="login-panel">
+    <view class="brand-card">
+      <image src="{{logo}}" mode="aspectFill"></image>
+      <text>桂圆电竞</text>
+    </view>
+
+    <view class="legal-copy">
+      <text>请阅读并同意</text>
+      <text class="link" bindtap="openAgreement">《用户协议》</text>
+      <text class="link" bindtap="openPrivacy">《隐私政策》</text>
+    </view>
+    <view class="age-copy">请承诺您已成年人或在监护人的授权下使用</view>
+
+    <view class="agree-row" bindtap="toggleAgreement">
+      <view class="check {{agreed ? 'checked' : ''}}">✓</view>
+      <text>我已阅读并同意协议政策信息并允许获取我的信息</text>
+    </view>
+
+    <button
+      class="phone-login"
+      bindtap="loginByWechat"
+      loading="{{submitting}}"
+    >微信快捷登录</button>
+
+    <button class="skip-login" bindtap="skip">暂不登录</button>
+  </view>
+
+  <view class="privacy-entry" bindtap="openWechatPrivacy">查看微信隐私保护指引</view>
+</view>

@@ -1,0 +1,88 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/rank/rank",
+    "pages/publish/publish",
+    "pages/quick-match/quick-match",
+    "pages/message/message",
+    "pages/order-chat/order-chat",
+    "pages/private-chat/private-chat",
+    "pages/login/login",
+    "pages/legal-detail/legal-detail",
+    "pages/mine/mine",
+    "pages/favorite-players/favorite-players",
+    "pages/review-manage/review-manage",
+    "pages/member-card/member-card",
+    "pages/bill-list/bill-list",
+    "pages/recharge/recharge",
+    "pages/pay-webview/pay-webview",
+    "pages/service-pay/service-pay",
+    "pages/settings/settings",
+    "pages/boss-orders/boss-orders",
+    "pages/player-workbench/player-workbench",
+    "pages/coverCrop/coverCrop",
+    "pages/player-order-detail/player-order-detail",
+    "pages/player-chat/player-chat",
+    "pages/player-list/player-list",
+    "pages/fun-order-search/fun-order-search",
+    "pages/game-orders/game-orders",
+    "pages/game-list/game-list",
+    "pages/detail/detail",
+    "pages/player-order/player-order",
+    "pages/order-detail/order-detail",
+    "pages/order/order"
+  ],
+  "window": {
+    "backgroundColor": "#f7f5ff",
+    "navigationBarTextStyle": "black",
+    "navigationStyle": "custom"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#7b739d",
+    "selectedColor": "#7357ee",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "assets/tabbar/home.png",
+        "selectedIconPath": "assets/tabbar/home-on.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/rank/rank",
+        "iconPath": "assets/tabbar/rank.png",
+        "selectedIconPath": "assets/tabbar/rank-on.png",
+        "text": "排行榜"
+      },
+      {
+        "pagePath": "pages/publish/publish",
+        "iconPath": "assets/tabbar/publish.png",
+        "selectedIconPath": "assets/tabbar/publish-on.png",
+        "text": "快速下单"
+      },
+      {
+        "pagePath": "pages/message/message",
+        "iconPath": "assets/tabbar/message.png",
+        "selectedIconPath": "assets/tabbar/message-on.png",
+        "text": "消息"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "assets/tabbar/mine.png",
+        "selectedIconPath": "assets/tabbar/mine-on.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "permission": {
+    "scope.camera": {
+      "desc": "用于拍摄头像、背景和聊天图片"
+    }
+  },
+  "__usePrivacyCheck__": true,
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

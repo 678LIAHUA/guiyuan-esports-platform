@@ -1,0 +1,143 @@
+<navigation-bar background="transparent">
+  <view slot="right" class="share">↗</view>
+</navigation-bar>
+
+<scroll-view class="page detail safe-bottom" scroll-y enable-flex type="list">
+  <view class="hero-wrap">
+    <image class="hero" src="{{player.cover || player.avatar}}" mode="aspectFill"></image>
+    <view class="online {{player.statusClass}}">{{player.statusText}}</view>
+  </view>
+
+  <view class="content">
+    <view class="profile card">
+      <view class="profile-info">
+        <image class="avatar" src="{{player.avatar}}" mode="aspectFill"></image>
+        <view class="profile-main">
+          <view class="name">{{player.name}} {{player.gender ? '· ' + player.gender : ''}}</view>
+          <view class="signature-line">{{signature}}</view>
+        </view>
+      </view>
+      <view class="profile-tags">
+        <text>ID {{player.id}}</text>
+        <text>{{player.level || player.rankValue}}</text>
+        <text wx:if="{{player.age}}">{{player.age}}岁</text>
+        <text wx:for="{{player.tags}}" wx:key="*this">{{item}}</text>
+      </view>
+      <view class="profile-actions">
+        <button bindtap="toggleFavorite">{{favoriteText}}</button>
+        <button bindtap="chatPlayer">私聊</button>
+        <button class="plain" bindtap="reportPlayer">举报</button>
+      </view>
+    </view>
+
+    <view class="score-card card">
+      <view class="score-left">
+        <view><text class="star">★</text><text class="score">{{overallScore}}</text></view>
+        <text>{{player.served}} 人已服务</text>
+      </view>
+      <view class="stat" wx:for="{{stats}}" wx:key="label">
+        <text>{{item.value}}</text>
+        <text>{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="section-head"><view class="section-title">价格标签</view></view>
+    <view class="price-tier-card card">
+      <view wx:for="{{player.priceTiers}}" wx:key="id">
+        <view>
+          <text>{{item.name}}</text>
+          <text>{{item.desc || player.level}}</text>
+        </view>
+        <view>
+          <text>{{item.price}}</text>
+          <text>猫粮/{{item.unit}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-head"><view class="section-title">个性签名</view></view>
+    <view class="signature-card card"><text>{{signature}}</text></view>
+
+    <view class="section-head gift-section-head">
+      <view>
+        <view class="section-title">礼物墙</view>
+        <text>收到过的礼物会点亮并显示数量</text>
+      </view>
+      <button bindtap="toggleGiftWall">{{giftToggleText}}</button>
+    </view>
+    <view class="gift-wall card {{giftWallExpanded ? 'expanded' : 'collapsed'}}">
+      <view class="gift-item {{item.lit ? 'lit' : 'dim'}}" wx:for="{{giftItems}}" wx:key="id">
+        <view class="gift-image-wrap">
+          <image class="gift-image" src="{{item.imageUrl}}" mode="aspectFit"></image>
+          <text wx:if="{{item.count > 0}}" class="gift-count">x{{item.count}}</text>
+        </view>
+        <text class="gift-name">{{item.name}}</text>
+        <text class="gift-price">{{item.price}} 猫粮</text>
+        <button
+          class="gift-send"
+          data-id="{{item.id}}"
+          loading="{{item.sending}}"
+          bindtap="sendGift"
+        >赠送</button>
+      </view>
+    </view>
+
+    <view class="section-head"><view class="section-title">评价墙</view></view>
+    <view class="review-wall">
+      <view class="review-card card" wx:for="{{player.reviews}}" wx:key="user">
+        <view><text>{{item.user}}</text><text>{{item.score}}</text></view>
+        <text>{{item.text}}</text>
+      </view>
+      <button wx:if="{{showReviewToggle}}" class="review-toggle-btn" bindtap="toggleReviews">{{reviewToggleText}}</button>
+    </view>
+
+    <view class="ability card">
+      <view class="ability-head">
+        <view>
+          <text>个人能力雷达图</text>
+          <text>综合评分：{{overallScore}}</text>
+        </view>
+        <text>五维评分</text>
+      </view>
+      <view class="radar-box">
+        <view class="radar-chart">
+          <canvas canvas-id="abilityRadar" class="radar-canvas"></canvas>
+          <view class="ability-fill" style="clip-path: polygon({{abilityPolygon}});"></view>
+          <view class="radar-line {{item.className}}" wx:for="{{radarLines}}" wx:key="index" style="left: {{item.left}}; top: {{item.top}}; width: {{item.width}}; transform: {{item.transform}};"></view>
+          <view class="radar-axis {{item.className}}" wx:for="{{radarAxes}}" wx:key="index" style="left: {{item.left}}; top: {{item.top}}; width: {{item.width}}; transform: {{item.transform}};"></view>
+          <view class="ability-line {{item.className}}" wx:for="{{abilityLines}}" wx:key="index" style="left: {{item.left}}; top: {{item.top}}; width: {{item.width}}; transform: {{item.transform}};"></view>
+          <view class="radar-point" wx:for="{{abilityPoints}}" wx:key="index" style="left: {{item.left}}; top: {{item.top}};"></view>
+          <view class="radar-label label-{{index}}" wx:for="{{abilityLabels}}" wx:key="name" style="left: {{item.left}}; top: {{item.top}};">
+            <text>{{item.name}}</text>
+            <text>{{item.value}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<view class="bottom-order safe-bottom">
+  <button class="primary-btn order-btn" bindtap="order">立即下单</button>
+</view>
+
+<view wx:if="{{showReportModal}}" class="report-mask" catchtap="closeReportModal">
+  <view class="report-panel" catchtap="noop">
+    <view class="report-head">
+      <text>投诉举报</text>
+      <button bindtap="closeReportModal">×</button>
+    </view>
+    <view class="report-player">
+      <image src="{{player.avatar}}" mode="aspectFill"></image>
+      <view>
+        <text>{{player.name}}</text>
+        <text>ID {{player.id}}</text>
+      </view>
+    </view>
+    <view class="report-reasons">
+      <button wx:for="{{reportReasons}}" wx:key="*this" class="{{reportReason === item ? 'active' : ''}}" data-reason="{{item}}" bindtap="chooseReportReason">{{item}}</button>
+    </view>
+    <textarea class="report-textarea" value="{{reportContent}}" maxlength="200" placeholder="请填写投诉内容，后台会记录投诉人、被投诉对象、时间和详情" bindinput="onReportInput"></textarea>
+    <button class="report-submit" loading="{{reportSubmitting}}" bindtap="submitReport">提交投诉</button>
+  </view>
+</view>

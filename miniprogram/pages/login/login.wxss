@@ -1,0 +1,128 @@
+page {
+  min-height: 100vh;
+  background: #f8f6ff;
+}
+
+.login-page {
+  min-height: 100vh;
+  padding: 120rpx 44rpx 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-panel {
+  width: 100%;
+  padding: 46rpx 34rpx 36rpx;
+  border-radius: 34rpx;
+  background: rgba(255, 255, 255, .94);
+  box-shadow: 0 24rpx 60rpx rgba(72, 54, 122, .12);
+}
+
+.brand-card {
+  height: 300rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24rpx;
+  border-radius: 28rpx;
+  background: linear-gradient(180deg, #fff, #f5f2ff);
+}
+
+.brand-card image {
+  width: 166rpx;
+  height: 166rpx;
+  border-radius: 50%;
+  box-shadow: 0 18rpx 36rpx rgba(92, 69, 150, .15);
+}
+
+.brand-card text {
+  color: #30284b;
+  font-size: 40rpx;
+  font-weight: 900;
+}
+
+.legal-copy {
+  margin-top: 42rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8rpx;
+  color: #8b839b;
+  font-size: 26rpx;
+  line-height: 38rpx;
+}
+
+.link {
+  color: #e83d70;
+  font-weight: 900;
+}
+
+.age-copy {
+  margin-top: 10rpx;
+  color: #aaa3b6;
+  font-size: 24rpx;
+  text-align: center;
+}
+
+.agree-row {
+  margin-top: 34rpx;
+  display: grid;
+  grid-template-columns: 42rpx minmax(0, 1fr);
+  gap: 14rpx;
+  align-items: start;
+}
+
+.check {
+  width: 42rpx;
+  height: 42rpx;
+  color: transparent;
+  font-size: 26rpx;
+  font-weight: 900;
+  line-height: 42rpx;
+  text-align: center;
+  border-radius: 50%;
+  background: #eeeaf5;
+}
+
+.check.checked {
+  color: #fff;
+  background: linear-gradient(135deg, #ff6b9a, #e83d70);
+}
+
+.agree-row text {
+  color: #8b839b;
+  font-size: 24rpx;
+  line-height: 36rpx;
+}
+
+.phone-login {
+  width: 100%;
+  height: 88rpx;
+  margin-top: 42rpx;
+  color: #fff;
+  font-size: 31rpx;
+  font-weight: 900;
+  line-height: 88rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #ff6b9a, #e83d70);
+  box-shadow: 0 16rpx 34rpx rgba(232, 61, 112, .24);
+}
+
+.skip-login {
+  width: 100%;
+  height: 76rpx;
+  margin-top: 24rpx;
+  color: #756d94;
+  font-size: 28rpx;
+  font-weight: 800;
+  line-height: 76rpx;
+}
+
+.privacy-entry {
+  margin-top: 56rpx;
+  color: #9b93ad;
+  font-size: 23rpx;
+  text-align: center;
+}

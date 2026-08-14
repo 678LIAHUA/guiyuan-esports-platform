@@ -1,0 +1,78 @@
+<navigation-bar title="群聊" back="{{false}}" background="transparent"></navigation-bar>
+
+<view class="page player-chat">
+  <view class="chat-room" wx:if="{{activeGroup}}">
+    <view class="group-head card">
+      <button bindtap="back">‹</button>
+      <view>
+        <text class="group-title">{{activeGroup.title}}</text>
+        <text class="group-sub">订单号 {{activeGroup.orderNo}} · 客服 {{activeGroup.service.name}} · 达人 {{playerCount}} 人</text>
+      </view>
+      <view class="status">{{statusText}}</view>
+    </view>
+
+    <scroll-view class="message-list" scroll-y enable-flex scroll-into-view="{{chatBottomId}}">
+      <view
+        class="bubble-row {{item.rowClass}}"
+        wx:for="{{activeGroup.messages}}"
+        wx:key="id"
+      >
+        <view wx:if="{{item.showAvatar}}" class="chat-avatar-wrap">
+          <image wx:if="{{item.avatar}}" class="chat-avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+          <text wx:else>{{item.avatarText}}</text>
+        </view>
+        <view class="bubble">
+          <view class="sender">{{item.sender}} · {{item.time}}</view>
+          <image
+            wx:if="{{item.type === 'image'}}"
+            class="chat-image"
+            src="{{item.imageUrl}}"
+            mode="aspectFill"
+            data-url="{{item.imageUrl}}"
+            bindtap="previewImage"
+          ></image>
+          <view wx:else class="text">{{item.text}}</view>
+        </view>
+      </view>
+      <view id="player-chat-bottom" class="chat-bottom-anchor"></view>
+    </scroll-view>
+
+    <view class="invite-dock">
+      <button class="{{canInvitePlayer ? 'invite-open-btn' : 'invite-open-btn disabled'}}" bindtap="toggleInvitePanel">
+        {{inviteButtonText}}
+      </button>
+      <text>{{inviteHintText}}</text>
+    </view>
+
+    <view class="invite-card" wx:if="{{invitePanelOpen}}">
+      <view>
+        <text>邀请第二个达人</text>
+        <text>{{inviteHintText}}</text>
+      </view>
+      <view class="invite-row">
+        <input
+          value="{{invitePlayerId}}"
+          placeholder="达人ID"
+          placeholder-class="placeholder"
+          bindinput="onInviteInput"
+          confirm-type="done"
+          bindconfirm="invitePlayer"
+        />
+        <button bindtap="invitePlayer">邀请</button>
+      </view>
+    </view>
+
+    <view class="input-bar">
+      <button class="image-btn" bindtap="chooseImage">＋</button>
+      <input
+        value="{{inputText}}"
+        placeholder="给老板和客服发消息"
+        placeholder-class="placeholder"
+        bindinput="onInput"
+        confirm-type="send"
+        bindconfirm="sendMessage"
+      />
+      <button bindtap="sendMessage">发送</button>
+    </view>
+  </view>
+</view>

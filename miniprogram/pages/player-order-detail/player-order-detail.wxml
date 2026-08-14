@@ -1,0 +1,40 @@
+<navigation-bar title="订单详情" background="transparent"></navigation-bar>
+
+<scroll-view class="page player-order-detail safe-bottom" scroll-y>
+  <view class="content" wx:if="{{detail}}">
+    <view class="detail-card">
+      <view class="detail-head">
+        <view>
+          <text class="detail-title">{{detail.title}}</text>
+          <text class="detail-sub">订单号：{{detail.orderNo}} · 客服：{{detail.serviceName}}</text>
+        </view>
+        <text class="detail-status">{{detail.statusText}}</text>
+      </view>
+
+      <view class="require-grid">
+        <view>
+          <text>订单要求</text>
+          <text>{{detail.requirementText}}</text>
+        </view>
+        <view>
+          <text>老板备注</text>
+          <text>{{detail.remarkText}}</text>
+        </view>
+        <view>
+          <text>等级说明</text>
+          <text>{{detail.levelHint}}</text>
+        </view>
+        <view>
+          <text>玩法类型</text>
+          <text>{{detail.playTypeText}}</text>
+        </view>
+        <view>
+          <text>已进群达人</text>
+          <text>{{detail.playerCount}} 人</text>
+        </view>
+      </view>
+
+      <button class="primary-btn single {{detail.buttonClass}}" bindtap="handlePrimary">{{detail.buttonText}}</button>
+    </view>
+  </view>
+</scroll-view>

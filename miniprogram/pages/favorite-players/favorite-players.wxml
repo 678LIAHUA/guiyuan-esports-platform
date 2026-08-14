@@ -1,0 +1,21 @@
+<navigation-bar title="收藏达人" background="#f7f4ff"></navigation-bar>
+
+<scroll-view class="page favorite-page safe-bottom" scroll-y>
+  <view class="content">
+    <view class="favorite-list" wx:if="{{hasPlayers}}">
+      <view class="favorite-card" wx:for="{{players}}" wx:key="id" data-id="{{item.id}}" bindtap="openDetail">
+        <image src="{{item.avatar || '/assets/avatar-yinyue.jpg'}}" mode="aspectFill"></image>
+        <view>
+          <text>{{item.name}}</text>
+          <text>{{item.gameName || item.level || '在线接单'}} · 评分 {{item.rating || '5.0'}}</text>
+          <text>{{item.title || item.desc || '点击查看达人详情'}}</text>
+        </view>
+        <text>查看</text>
+      </view>
+    </view>
+    <view class="empty" wx:else>
+      <text>还没有收藏达人</text>
+      <text>进入达人详情点收藏后，会显示在这里</text>
+    </view>
+  </view>
+</scroll-view>

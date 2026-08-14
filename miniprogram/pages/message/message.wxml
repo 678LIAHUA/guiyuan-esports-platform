@@ -1,0 +1,37 @@
+<navigation-bar title="消息" back="{{false}}" background="transparent"></navigation-bar>
+
+<view class="page message safe-bottom">
+  <scroll-view class="message-scroll" scroll-y enable-flex type="list">
+    <view class="content">
+    <view class="notice card">
+      <view>
+        <text class="notice-title">订单专属群聊</text>
+        <text class="notice-text">老板下单后自动建群，客服和接单达人会进入同一个群</text>
+      </view>
+      <view class="notice-icon">▤</view>
+    </view>
+
+    <view class="chat-list card" wx:if="{{groups.length}}">
+      <view class="chat" wx:for="{{groups}}" wx:key="id" data-id="{{item.id}}" bindtap="openGroup">
+        <view class="group-avatar">群</view>
+        <view class="chat-main">
+          <view class="chat-top">
+            <text class="name">{{item.title}}</text>
+            <text>{{item.updatedAt}}</text>
+          </view>
+          <view class="member-text">{{item.memberText}}</view>
+          <view class="chat-bottom">
+            <text>{{item.lastMessage}}</text>
+            <view wx:if="{{item.unread}}" class="badge">{{item.unread}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-card card" wx:else>
+      <text>暂无订单群</text>
+      <text>确认下单后会自动生成本单专属群聊</text>
+    </view>
+  </view>
+  </scroll-view>
+</view>

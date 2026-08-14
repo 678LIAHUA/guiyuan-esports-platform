@@ -1,0 +1,87 @@
+<navigation-bar title="会员卡" background="transparent"></navigation-bar>
+
+<scroll-view class="page member-page safe-bottom" scroll-y>
+  <view class="content">
+    <view class="member-swiper-wrap">
+      <swiper
+        class="member-swiper"
+        current="{{swiperCurrent}}"
+        previous-margin="30rpx"
+        next-margin="30rpx"
+        bindchange="onLevelSwiperChange"
+      >
+        <swiper-item wx:for="{{levels}}" wx:key="id">
+          <view class="member-hero {{item.unlocked ? 'unlocked' : 'locked'}}">
+            <image class="member-card-bg" src="{{item.imageUrl}}" mode="aspectFill"></image>
+            <view class="card-shade"></view>
+            <view class="lock-badge" wx:if="{{!item.unlocked}}">未解锁</view>
+            <view class="hero-head">
+              <image src="{{customer.avatar || '/assets/avatar-yinyue.jpg'}}" mode="aspectFill"></image>
+              <view>
+                <text>桂圆电竞会员</text>
+                <text>{{customer.name || '喵喵喵'}}</text>
+              </view>
+            </view>
+            <view class="hero-level">{{item.name}}</view>
+            <view class="hero-meta">
+              <text>ID {{customer.id || '000000'}}</text>
+              <text>{{item.discountText}}</text>
+            </view>
+            <view class="progress-wrap">
+              <view class="progress-bar">
+                <view style="width: {{customer.memberProgress || 0}}%;"></view>
+              </view>
+              <text>{{item.unlocked ? '当前可使用该等级权益' : item.remainText}}</text>
+            </view>
+          </view>
+        </swiper-item>
+      </swiper>
+      <view class="swiper-tip">左右滑动查看全部会员等级</view>
+    </view>
+
+    <view class="profile-panel card">
+      <view class="section-title">会员资料</view>
+      <view class="info-grid">
+        <view>
+          <text>客户ID</text>
+          <text>{{customer.id || '000000'}}</text>
+        </view>
+        <view>
+          <text>客户昵称</text>
+          <text>{{customer.name || '喵喵喵'}}</text>
+        </view>
+        <view>
+          <text>猫粮余额</text>
+          <text>{{customer.balanceCatFood || 0}}</text>
+        </view>
+        <view>
+          <text>累计消费</text>
+          <text>{{customer.spentCatFood || 0}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="benefit-grid">
+      <view class="benefit-card card">
+        <text>{{selectedLevel.name || '会员'}}权益</text>
+        <text>{{selectedLevel.benefits}}</text>
+      </view>
+      <view class="benefit-card card">
+        <text>{{selectedLevel.lockText}}</text>
+        <text>{{selectedLevel.unlocked ? '已解锁，可直接享受权益' : selectedLevel.remainText}}</text>
+      </view>
+    </view>
+
+    <view class="level-panel card">
+      <view class="section-title">会员等级</view>
+      <view class="level-row {{item.cls}}" wx:for="{{levels}}" wx:key="id">
+        <image class="level-card-img" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        <view>
+          <text>{{item.name}}</text>
+          <text>累计消费 {{item.threshold}} 猫粮 · {{item.discount}}% 支付扣款</text>
+        </view>
+        <text>{{item.remainText}}</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>

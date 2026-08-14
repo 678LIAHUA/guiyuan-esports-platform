@@ -1,0 +1,158 @@
+page {
+  min-height: 100vh;
+  background: #f7f8fb;
+}
+
+.settings-page {
+  min-height: 100vh;
+  padding-top: 18rpx;
+  background: #f7f8fb;
+}
+
+.profile-editor {
+  margin: 0 24rpx 22rpx;
+  padding: 28rpx 26rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  border-radius: 26rpx;
+  background: #fff;
+  box-shadow: 0 12rpx 28rpx rgba(42, 38, 70, .06);
+}
+
+.profile-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22rpx;
+}
+
+.avatar-picker {
+  width: 190rpx;
+  height: 210rpx;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10rpx;
+  color: #7b739d;
+  font-size: 22rpx;
+  font-weight: 800;
+  line-height: 1;
+  border-radius: 24rpx;
+  background: transparent;
+}
+
+.avatar-picker::after {
+  border: 0;
+}
+
+.avatar-picker image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 38rpx;
+  border: 4rpx solid #efe9ff;
+  box-shadow: 0 10rpx 24rpx rgba(93, 69, 190, .14);
+}
+
+.nickname-box {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+}
+
+.nickname-box text {
+  color: #252832;
+  font-size: 26rpx;
+  font-weight: 900;
+}
+
+.nickname-box input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 76rpx;
+  padding: 0 22rpx;
+  color: #252832;
+  font-size: 27rpx;
+  border-radius: 20rpx;
+  background: #f7f5ff;
+}
+
+.placeholder {
+  color: #a8a0b8;
+}
+
+.save-profile {
+  width: 100%;
+  height: 78rpx;
+  margin: 0;
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 900;
+  line-height: 78rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #9174ff, #6845df);
+}
+
+.save-profile::after {
+  border: 0;
+}
+
+.settings-group {
+  margin-bottom: 22rpx;
+  background: #fff;
+  border-top: 1rpx solid rgba(22, 24, 32, .04);
+  border-bottom: 1rpx solid rgba(22, 24, 32, .04);
+}
+
+.settings-row {
+  min-height: 112rpx;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 20rpx;
+  padding: 0 28rpx;
+  border-bottom: 1rpx solid #f0f1f5;
+}
+
+.settings-row:last-child {
+  border-bottom: 0;
+}
+
+.row-name {
+  color: #252832;
+  font-size: 31rpx;
+  font-weight: 500;
+}
+
+.row-right {
+  display: flex;
+  align-items: center;
+  gap: 18rpx;
+  color: #9b9ca3;
+  font-size: 29rpx;
+}
+
+.arrow {
+  color: #c8c9cf;
+  font-size: 52rpx;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.logout-btn {
+  width: 100%;
+  height: 118rpx;
+  margin: 22rpx 0 0;
+  padding: 0;
+  color: #b48be6;
+  font-size: 32rpx;
+  font-weight: 500;
+  line-height: 118rpx;
+  border-radius: 0;
+  background: #fff;
+}
